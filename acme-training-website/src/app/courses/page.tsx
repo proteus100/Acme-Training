@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Calendar, Clock, Users, Pound } from 'lucide-react'
+import { Calendar, Clock, Users, PoundSterling } from 'lucide-react'
 
 interface Course {
   id: string
@@ -160,7 +160,7 @@ export default function CoursesPage() {
                       <span>Max {course.maxStudents} students</span>
                     </div>
                     <div className="flex items-center text-sm font-semibold text-green-600">
-                      <Pound className="w-4 h-4 mr-1" />
+                      <PoundSterling className="w-4 h-4 mr-1" />
                       <span>{course.price.toFixed(0)}</span>
                     </div>
                   </div>
