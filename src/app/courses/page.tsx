@@ -49,13 +49,100 @@ export default function CoursesPage() {
         const data = await response.json()
         setCourses(data)
       } else {
-        console.error('Failed to fetch courses')
+        // If API fails, show sample data for demo purposes
+        console.warn('API not available, showing sample data')
+        setCourses(getSampleCourses())
       }
     } catch (error) {
-      console.error('Error fetching courses:', error)
+      console.warn('Database not connected, showing sample data')
+      setCourses(getSampleCourses())
     } finally {
       setLoading(false)
     }
+  }
+
+  const getSampleCourses = (): Course[] => {
+    const allCourses = [
+      {
+        id: '1',
+        title: 'ACS CORE & 4 REA',
+        description: 'Gas safety reassessment for core competencies and 4 appliances. Run by engineers for engineers.',
+        category: 'GAS_SAFE',
+        duration: 16,
+        price: 650.00,
+        maxStudents: 12,
+        sessions: [
+          { id: '1', startDate: '2024-09-16T00:00:00Z', endDate: '2024-09-17T00:00:00Z', availableSpots: 12, bookedSpots: 3 },
+          { id: '2', startDate: '2024-10-17T00:00:00Z', endDate: '2024-10-18T00:00:00Z', availableSpots: 12, bookedSpots: 5 }
+        ]
+      },
+      {
+        id: '2',
+        title: 'ACS CORE & 4 INITIAL',
+        description: 'Initial gas safety assessment for core competencies and 4 appliances. Complete certification course.',
+        category: 'GAS_SAFE',
+        duration: 40,
+        price: 995.00,
+        maxStudents: 12,
+        sessions: [
+          { id: '3', startDate: '2024-09-30T00:00:00Z', endDate: '2024-10-04T00:00:00Z', availableSpots: 12, bookedSpots: 8 }
+        ]
+      },
+      {
+        id: '3',
+        title: 'LPG PD/RPH REA',
+        description: 'LPG Permanent Dwellings and Residential Park Homes reassessment.',
+        category: 'LPG',
+        duration: 16,
+        price: 300.00,
+        maxStudents: 12,
+        sessions: [
+          { id: '4', startDate: '2024-10-02T00:00:00Z', endDate: '2024-10-03T00:00:00Z', availableSpots: 12, bookedSpots: 2 }
+        ]
+      },
+      {
+        id: '4',
+        title: 'OFTEC REA',
+        description: 'OFTEC oil heating reassessment for qualified technicians.',
+        category: 'OFTEC',
+        duration: 16,
+        price: 600.00,
+        maxStudents: 12,
+        sessions: [
+          { id: '5', startDate: '2024-09-23T00:00:00Z', endDate: '2024-09-24T00:00:00Z', availableSpots: 12, bookedSpots: 6 }
+        ]
+      },
+      {
+        id: '5',
+        title: 'Air Source Heat Pump',
+        description: 'Air source heat pump installation, commissioning and maintenance training.',
+        category: 'HEAT_PUMP',
+        duration: 32,
+        price: 650.00,
+        maxStudents: 10,
+        sessions: [
+          { id: '6', startDate: '2024-09-27T00:00:00Z', endDate: '2024-09-30T00:00:00Z', availableSpots: 10, bookedSpots: 4 }
+        ]
+      },
+      {
+        id: '6',
+        title: 'Vented/Unvented REA',
+        description: 'Vented and unvented hot water systems reassessment.',
+        category: 'WATER',
+        duration: 8,
+        price: 185.00,
+        maxStudents: 12,
+        sessions: [
+          { id: '7', startDate: '2024-09-19T00:00:00Z', endDate: '2024-09-19T00:00:00Z', availableSpots: 12, bookedSpots: 1 }
+        ]
+      }
+    ]
+    
+    if (selectedCategory === 'all') {
+      return allCourses
+    }
+    
+    return allCourses.filter(course => course.category === selectedCategory)
   }
 
   const getCategoryBadgeColor = (category: string) => {
