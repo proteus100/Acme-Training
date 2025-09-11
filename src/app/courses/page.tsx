@@ -32,6 +32,7 @@ export default function CoursesPage() {
     { value: 'HEAT_PUMP', label: 'Heat Pump' },
     { value: 'OFTEC', label: 'OFTEC Oil' },
     { value: 'LPG', label: 'LPG' },
+    { value: 'WATER', label: 'Water Systems' },
     { value: 'VAPORIZING', label: 'Vaporizing Appliances' }
   ]
 
@@ -63,6 +64,7 @@ export default function CoursesPage() {
       case 'HEAT_PUMP': return 'bg-green-100 text-green-800'
       case 'OFTEC': return 'bg-blue-100 text-blue-800'
       case 'LPG': return 'bg-purple-100 text-purple-800'
+      case 'WATER': return 'bg-cyan-100 text-cyan-800'
       case 'VAPORIZING': return 'bg-orange-100 text-orange-800'
       default: return 'bg-gray-100 text-gray-800'
     }

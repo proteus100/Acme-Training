@@ -1,0 +1,149 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Course {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  category    CourseCategory
+  duration    Int      // Duration in hours
+  price       Float
+  maxStudents Int      @default(12)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  sessions    CourseSession[]
+  bookings    Booking[]
+  
+  @@map("courses")
+}
+
+model CourseSession {
+  id        String   @id @default(cuid())
+  courseId  String
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  
+  startDate DateTime
+  endDate   DateTime
+  startTime String   // Format: "09:00"
+  endTime   String   // Format: "17:00"
+  
+  availableSpots Int @default(12)
+  bookedSpots    Int @default(0)
+  
+  isActive  Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  bookings  Booking[]
+  
+  @@map("course_sessions")
+}
+
+model Customer {
+  id        String   @id @default(cuid())
+  firstName String
+  lastName  String
+  email     String   @unique
+  phone     String?
+  company   String?
+  address   String?
+  postcode  String?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  bookings  Booking[]
+  
+  @@map("customers")
+}
+
+model Booking {
+  id        String   @id @default(cuid())
+  
+  customerId String
+  customer   Customer @relation(fields: [customerId], references: [id])
+  
+  courseId  String
+  course    Course   @relation(fields: [courseId], references: [id])
+  
+  sessionId String
+  session   CourseSession @relation(fields: [sessionId], references: [id])
+  
+  totalAmount    Float
+  depositAmount  Float?
+  amountPaid     Float    @default(0)
+  paymentStatus  PaymentStatus @default(PENDING)
+  
+  bookingStatus  BookingStatus @default(CONFIRMED)
+  
+  specialRequests String?
+  notes          String?
+  
+  stripePaymentIntentId String?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  payments Payment[]
+  
+  @@map("bookings")
+}
+
+model Payment {
+  id        String   @id @default(cuid())
+  bookingId String
+  booking   Booking  @relation(fields: [bookingId], references: [id])
+  
+  amount           Float
+  paymentType      PaymentType
+  paymentMethod    String? // card, bank_transfer, etc.
+  stripeChargeId   String?
+  
+  status    PaymentStatus @default(PENDING)
+  processedAt DateTime?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@map("payments")
+}
+
+enum CourseCategory {
+  GAS_SAFE
+  HEAT_PUMP
+  OFTEC
+  LPG
+  VAPORIZING
+  WATER
+}
+
+enum BookingStatus {
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+  NO_SHOW
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  PARTIALLY_PAID
+  REFUNDED
+  FAILED
+}
+
+enum PaymentType {
+  DEPOSIT
+  FULL_PAYMENT
+  BALANCE
+}
