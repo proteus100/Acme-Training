@@ -28,8 +28,17 @@ COPY . .
 
 # Build the application
 WORKDIR /app/acme-training-website
-RUN npm install --legacy-peer-deps
+
+# Configure npm to use legacy-peer-deps globally
+RUN npm config set legacy-peer-deps true
+
+# Install dependencies
+RUN npm install
+
+# Generate Prisma client
 RUN npx prisma generate
+
+# Build Next.js
 RUN npm run build
 
 # Production stage
