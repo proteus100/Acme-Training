@@ -122,9 +122,11 @@ function CheckoutForm({ amount, courseTitle, customerName, bookingData, onSucces
                   },
                 },
               },
+              hidePostalCode: true,
             }}
           />
         </div>
+        <p className="text-xs text-gray-500 mt-1">Your UK postcode from the booking form will be used for billing</p>
       </div>
 
       <div className="flex items-center text-sm text-gray-600">

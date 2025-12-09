@@ -1,0 +1,40 @@
+/**
+ * TrainKit Training Management Platform
+ *
+ * Copyright (c) 2025 TrainKit Ltd. All Rights Reserved.
+ *
+ * PROPRIETARY AND CONFIDENTIAL
+ *
+ * This source code is the proprietary and confidential information of
+ * TrainKit Ltd. Unauthorized copying, modification, distribution, or use
+ * of this source code, via any medium, is strictly prohibited without
+ * the express written permission of TrainKit Ltd.
+ *
+ * This source code is provided for licensed use only. All rights reserved.
+ *
+ * For licensing information, contact: legal@trainkit.co.uk
+ */
+
+// ============================================================================
+// ADD THE ABOVE HEADER TO ALL SOURCE FILES (.ts, .tsx, .js, .jsx files)
+// ============================================================================
+
+// For Python files (.py), use this format:
+# TrainKit Training Management Platform
+# Copyright (c) 2025 TrainKit Ltd. All Rights Reserved.
+# PROPRIETARY AND CONFIDENTIAL
+# Unauthorized use is strictly prohibited.
+
+// For CSS/SCSS files, use this format:
+/*
+ * TrainKit Training Management Platform
+ * Copyright (c) 2025 TrainKit Ltd. All Rights Reserved.
+ * PROPRIETARY AND CONFIDENTIAL
+ */
+
+// For HTML files, use this format:
+<!--
+  TrainKit Training Management Platform
+  Copyright (c) 2025 TrainKit Ltd. All Rights Reserved.
+  PROPRIETARY AND CONFIDENTIAL
+-->

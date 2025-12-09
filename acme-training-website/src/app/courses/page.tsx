@@ -1,8 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { Suspense, useState, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Calendar, Clock, Users, PoundSterling } from 'lucide-react'
+import Image from 'next/image'
 
 interface Course {
   id: string
@@ -21,19 +23,36 @@ interface Course {
   }>
 }
 
-export default function CoursesPage() {
+function CoursesPageContent() {
+  const searchParams = useSearchParams()
   const [courses, setCourses] = useState<Course[]>([])
   const [loading, setLoading] = useState(true)
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
 
   const categories = [
     { value: 'all', label: 'All Courses' },
-    { value: 'GAS_SAFE', label: 'Gas Safe' },
-    { value: 'HEAT_PUMP', label: 'Heat Pump' },
-    { value: 'OFTEC', label: 'OFTEC Oil' },
-    { value: 'LPG', label: 'LPG' },
-    { value: 'VAPORIZING', label: 'Vaporizing Appliances' }
+    { value: 'gas_safe', label: 'Gas Safe' },
+    { value: 'heat_pump', label: 'Heat Pump' },
+    { value: 'oftec', label: 'OFTEC' },
+    { value: 'lpg', label: 'LPG' },
+    { value: 'fgas_air_conditioning', label: 'F-Gas Air Conditioning' },
+    { value: 'commercial_catering', label: 'Commercial Catering' },
+    { value: 'commercial_laundry', label: 'Commercial Laundry' },
+    { value: 'commercial_gas', label: 'Commercial Gas' },
+    { value: 'commercial_core', label: 'Commercial Core' },
+    { value: 'water', label: 'Water' },
+    { value: 'vaporizing', label: 'Vaporizing' },
+    { value: 'electrical', label: 'Electrical (NIC EIC)' },
+    { value: 'refrigeration', label: 'Refrigeration' }
   ]
+
+  // Set initial category from URL parameter
+  useEffect(() => {
+    const categoryParam = searchParams.get('category')
+    if (categoryParam && categories.some(cat => cat.value === categoryParam)) {
+      setSelectedCategory(categoryParam)
+    }
+  }, [searchParams])
 
   useEffect(() => {
     fetchCourses()
@@ -63,8 +82,35 @@ export default function CoursesPage() {
       case 'HEAT_PUMP': return 'bg-green-100 text-green-800'
       case 'OFTEC': return 'bg-blue-100 text-blue-800'
       case 'LPG': return 'bg-purple-100 text-purple-800'
-      case 'VAPORIZING': return 'bg-orange-100 text-orange-800'
+      case 'FGAS_AIR_CONDITIONING': return 'bg-cyan-100 text-cyan-800'
+      case 'COMMERCIAL_CATERING': return 'bg-orange-100 text-orange-800'
+      case 'COMMERCIAL_LAUNDRY': return 'bg-indigo-100 text-indigo-800'
+      case 'COMMERCIAL_GAS': return 'bg-amber-100 text-amber-800'
+      case 'COMMERCIAL_CORE': return 'bg-gray-100 text-gray-800'
+      case 'WATER': return 'bg-teal-100 text-teal-800'
+      case 'VAPORIZING': return 'bg-pink-100 text-pink-800'
+      case 'ELECTRICAL': return 'bg-yellow-100 text-yellow-800'
+      case 'REFRIGERATION': return 'bg-blue-100 text-blue-800'
       default: return 'bg-gray-100 text-gray-800'
+    }
+  }
+
+  const getCategoryLogo = (category: string) => {
+    switch (category) {
+      case 'GAS_SAFE': return '/images/logos/gas-safe.svg'
+      case 'HEAT_PUMP': return '/images/logos/heat-pump.svg'
+      case 'OFTEC': return '/images/logos/oftec.svg'
+      case 'LPG': return '/images/logos/lpg.svg'
+      case 'FGAS_AIR_CONDITIONING': return '/images/logos/gas-safe.svg' // F-Gas uses similar certification
+      case 'COMMERCIAL_CATERING': return '/images/logos/gas-safe.svg'
+      case 'COMMERCIAL_LAUNDRY': return '/images/logos/gas-safe.svg'
+      case 'COMMERCIAL_GAS': return '/images/logos/gas-safe.svg'
+      case 'COMMERCIAL_CORE': return '/images/logos/gas-safe.svg'
+      case 'WATER': return '/images/logos/gas-safe.svg'
+      case 'VAPORIZING': return '/images/logos/gas-safe.svg'
+      case 'ELECTRICAL': return '/images/logos/electrical.svg'
+      case 'REFRIGERATION': return '/images/logos/refrigeration.svg'
+      default: return '/images/logos/gas-safe.svg' // fallback
     }
   }
 
@@ -74,6 +120,25 @@ export default function CoursesPage() {
       month: 'short',
       year: 'numeric'
     })
+  }
+
+  const formatCategoryName = (category: string) => {
+    switch (category) {
+      case 'FGAS_AIR_CONDITIONING': return 'F-Gas Air Conditioning'
+      case 'COMMERCIAL_CATERING': return 'Commercial Catering'
+      case 'COMMERCIAL_LAUNDRY': return 'Commercial Laundry'
+      case 'COMMERCIAL_GAS': return 'Commercial Gas'
+      case 'COMMERCIAL_CORE': return 'Commercial Core'
+      case 'GAS_SAFE': return 'Gas Safe'
+      case 'HEAT_PUMP': return 'Heat Pump'
+      case 'OFTEC': return 'OFTEC'
+      case 'LPG': return 'LPG'
+      case 'WATER': return 'Water'
+      case 'VAPORIZING': return 'Vaporizing'
+      case 'ELECTRICAL': return 'Electrical (NIC EIC)'
+      case 'REFRIGERATION': return 'Refrigeration'
+      default: return category.replace(/_/g, ' ')
+    }
   }
 
   if (loading) {
@@ -138,11 +203,22 @@ export default function CoursesPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {courses.map((course) => (
               <div key={course.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                {/* Category Badge */}
+                {/* Category Badge & Logo */}
                 <div className="p-4 pb-2">
-                  <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${getCategoryBadgeColor(course.category)}`}>
-                    {course.category.replace('_', ' ')}
-                  </span>
+                  <div className="flex items-center justify-between">
+                    <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${getCategoryBadgeColor(course.category)}`}>
+                      {formatCategoryName(course.category)}
+                    </span>
+                    <div className="flex-shrink-0">
+                      <Image
+                        src={getCategoryLogo(course.category)}
+                        alt={`${course.category} certification logo`}
+                        width={60}
+                        height={30}
+                        className="object-contain"
+                      />
+                    </div>
+                  </div>
                 </div>
 
                 <div className="p-4 pt-2">
@@ -204,5 +280,20 @@ export default function CoursesPage() {
         )}
       </div>
     </div>
+  )
+}
+
+export default function CoursesPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading courses...</p>
+        </div>
+      </div>
+    }>
+      <CoursesPageContent />
+    </Suspense>
   )
 }

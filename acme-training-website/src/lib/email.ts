@@ -1,6 +1,63 @@
-import { Resend } from 'resend'
+import nodemailer from 'nodemailer'
+import type { Transporter } from 'nodemailer'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Lazy initialization to avoid build-time errors
+let transporter: Transporter | null = null
+
+function getTransporter() {
+  if (!transporter && process.env.SMTP_HOST) {
+    transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: parseInt(process.env.SMTP_PORT || '587'),
+      secure: false, // Use STARTTLS
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASSWORD
+      }
+    })
+  }
+  return transporter
+}
+
+// Generic email sending function
+interface SendEmailParams {
+  to: string | string[]
+  subject: string
+  html: string
+  text?: string
+  from?: string
+}
+
+export async function sendEmail({
+  to,
+  subject,
+  html,
+  text,
+  from = 'TrainKit <admin@trainkit.co.uk>'
+}: SendEmailParams) {
+  try {
+    const client = getTransporter()
+
+    if (!client) {
+      console.error('Email transporter not initialized - SMTP configuration missing')
+      return { success: false, error: 'Email service not configured' }
+    }
+
+    const result = await client.sendMail({
+      from,
+      to: Array.isArray(to) ? to.join(', ') : to,
+      subject,
+      html,
+      text: text || undefined
+    })
+
+    console.log('Email sent successfully:', result.messageId)
+    return { success: true, result: { id: result.messageId } }
+  } catch (error) {
+    console.error('Error sending email:', error)
+    return { success: false, error }
+  }
+}
 
 interface BookingConfirmationData {
   customerName: string
@@ -15,21 +72,23 @@ interface BookingConfirmationData {
 
 export async function sendBookingConfirmation(data: BookingConfirmationData) {
   try {
-    const { data: result, error } = await resend.emails.send({
+    const client = getTransporter()
+
+    if (!client) {
+      console.error('Email transporter not initialized')
+      return { success: false, error: 'Email service not configured' }
+    }
+
+    const result = await client.sendMail({
       from: 'ACME Training Centre <bookings@acme-training.co.uk>',
-      to: [data.customerEmail],
-      bcc: ['admin@acme-training.co.uk'],
+      to: data.customerEmail,
+      bcc: 'admin@acme-training.co.uk',
       subject: `Booking Confirmation - ${data.courseTitle}`,
       html: generateBookingConfirmationHtml(data)
     })
 
-    if (error) {
-      console.error('Error sending booking confirmation:', error)
-      return { success: false, error }
-    }
-
-    console.log('Booking confirmation sent:', result)
-    return { success: true, result }
+    console.log('Booking confirmation sent:', result.messageId)
+    return { success: true, result: { id: result.messageId } }
   } catch (error) {
     console.error('Error sending booking confirmation:', error)
     return { success: false, error }
@@ -230,37 +289,40 @@ export async function sendPaymentReminder(data: {
   bookingId: string
 }) {
   try {
-    const { data: result, error } = await resend.emails.send({
+    const client = getTransporter()
+
+    if (!client) {
+      console.error('Email transporter not initialized')
+      return { success: false, error: 'Email service not configured' }
+    }
+
+    const result = await client.sendMail({
       from: 'ACME Training Centre <bookings@acme-training.co.uk>',
-      to: [data.customerEmail],
+      to: data.customerEmail,
       subject: `Payment Reminder - ${data.courseTitle}`,
       html: `
         <h2>Payment Reminder</h2>
         <p>Dear ${data.customerName},</p>
-        
-        <p>This is a friendly reminder that you have an outstanding balance of <strong>£${data.outstandingAmount.toFixed(2)}</strong> 
+
+        <p>This is a friendly reminder that you have an outstanding balance of <strong>£${data.outstandingAmount.toFixed(2)}</strong>
         for your upcoming course:</p>
-        
+
         <div style="background-color: #f1f5f9; padding: 20px; border-radius: 6px; margin: 20px 0;">
           <strong>${data.courseTitle}</strong><br>
           Date: ${new Date(data.sessionDate).toLocaleDateString('en-GB')}<br>
           Booking Reference: #${data.bookingId.substring(0, 8).toUpperCase()}
         </div>
-        
+
         <p>Please ensure payment is made before your course start date. You can contact us to arrange payment.</p>
-        
+
         <p>Contact: info@acme-training.co.uk</p>
-        
+
         <p>Thank you,<br>ACME Training Centre</p>
       `
     })
 
-    if (error) {
-      console.error('Error sending payment reminder:', error)
-      return { success: false, error }
-    }
-
-    return { success: true, result }
+    console.log('Payment reminder sent:', result.messageId)
+    return { success: true, result: { id: result.messageId } }
   } catch (error) {
     console.error('Error sending payment reminder:', error)
     return { success: false, error }

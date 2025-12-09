@@ -1,0 +1,14 @@
+<svg width="120" height="60" viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="120" height="60" rx="4" fill="#7C3AED"/>
+  <rect x="2" y="2" width="116" height="56" rx="2" fill="white"/>
+  
+  <!-- Heat Pump Text -->
+  <text x="60" y="18" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#7C3AED">HEAT PUMP</text>
+  <text x="60" y="32" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#7C3AED">CERTIFIED</text>
+  <text x="60" y="48" text-anchor="middle" font-family="Arial, sans-serif" font-size="6" fill="#666">INSTALLER</text>
+  
+  <!-- Simple heat pump unit icon -->
+  <rect x="20" y="20" width="12" height="8" rx="1" fill="#7C3AED"/>
+  <circle cx="26" cy="22" r="1" fill="white"/>
+  <path d="M32 22 L36 20 L36 26 L32 24" fill="#7C3AED"/>
+</svg>

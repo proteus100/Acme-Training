@@ -1,15 +1,622 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
+}
+
+// Multi-Tenant Support
+model Tenant {
+  id            String   @id @default(cuid())
+  name          String   // "ACME Gas Training"
+  slug          String   @unique // "acme"
+  domain        String?  // "acmetraining.co.uk"
+  logo          String?  // "/uploads/acme-logo.png"
+  primaryColor  String   @default("#1e40af")
+  secondaryColor String  @default("#dc2626")
+  email         String
+  phone         String?
+  address       String?
+  city          String?
+  postcode      String?
+  website       String?
+  stripeKey     String?  // Their Stripe publishable key
+  stripeSecret  String?  // Their Stripe secret key (encrypted)
+  active        Boolean  @default(true)
+  planType      TenantPlan @default(STARTER)
+  maxStudents   Int      @default(50)
+  maxCourses    Int      @default(5)  // Course limits per plan
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  // SEO & Content Fields
+  businessType      String?  // "Gas Safety Training", "Plumbing Training", etc.
+  mainServices      String?  // JSON array of main services
+  serviceAreas      String?  // JSON array of areas served
+  yearsExperience   Int?     // For "20+ years experience"
+  accreditations    String?  // JSON array of certifications/accreditations
+  
+  // SEO Meta Data
+  metaTitle         String?  // Custom page title
+  metaDescription   String?  // Custom meta description
+  metaKeywords      String?  // SEO keywords
+  businessHours     String?  // JSON object for opening hours
+  socialLinks       String?  // JSON object for social media
+  
+  // Local SEO
+  county            String?  // "Devon", "Somerset", etc.
+  nearbyAreas       String?  // JSON array of nearby towns/cities
+  latitude          Float?   // For maps integration
+  longitude         Float?   // For maps integration
+  
+  // Content Customization
+  heroHeading       String?  // Custom main heading
+  heroSubheading    String?  // Custom subheading
+  aboutText         String?  // Custom about section
+  whyChooseUs       String?  // JSON array of USPs
+  testimonialText   String?  // Custom testimonials intro
+  
+  // Subscription fields
+  stripeCustomerId    String?  // Stripe customer ID for billing
+  subscriptionId      String?  // Current Stripe subscription ID
+  subscriptionStatus  SubscriptionStatus @default(TRIAL)
+  trialEndsAt         DateTime? // Trial end date
+  subscriptionEndsAt  DateTime? // Subscription end date
+  cancelAtPeriodEnd   Boolean @default(false)
+  
+  // Relations
+  courses       Course[]
+  customers     Customer[]
+  bookings      Booking[]
+  sessions      CourseSession[]
+  achievements  Achievement[]
+  reminders     CertificationReminder[]
+  emailTemplates EmailTemplate[]
+  settings      TenantSettings?
+  subscription  TenantSubscription?
+  adminUsers    AdminUser[]  // Tenant-scoped admin users
+  bundles       Bundle[]
+  bundleBookings BundleBooking[]
+}
+
+enum TenantPlan {
+  STARTER     // £297/month - up to 50 students
+  PROFESSIONAL // £497/month - up to 150 students  
+  ENTERPRISE  // £797/month - unlimited students
+}
+
+model TenantSettings {
+  id                    String   @id @default(cuid())
+  tenantId              String   @unique
+  whiteLabel            Boolean  @default(false)
+  customDomain          Boolean  @default(false)
+  emailFromName         String?
+  emailFromAddress      String?
+  smtpHost              String?
+  smtpPort              Int?
+  smtpUser              String?
+  smtpPassword          String?  // encrypted
+  bookingWindowDays     Int      @default(30)
+  cancellationHours     Int      @default(24)
+  depositPercentage     Float    @default(0.3)
+  minSessionAttendees   Int      @default(4)  // Minimum attendees for session viability alert
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  tenant                Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+}
+
+model Course {
+  id                  String          @id @default(cuid())
+  tenantId            String
+  title               String
+  description         String
+  category            CourseCategory
+  customCategoryName  String?         // For CUSTOM category type
+  duration            Int
+  price               Float
+  maxStudents         Int
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
+  tenant              Tenant          @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  sessions            CourseSession[]
+  achievements        Achievement[]
+  bundleCourses       BundleCourse[]
+
+  @@unique([tenantId, title]) // Unique per tenant
+}
+
+model CourseSession {
+  id             String              @id @default(cuid())
+  tenantId       String
+  courseId       String
+  startDate      DateTime
+  endDate        DateTime
+  startTime      String
+  endTime        String
+  availableSpots Int
+  bookedSpots    Int                 @default(0)
+  isActive       Boolean             @default(true)
+  isCompleted    Boolean             @default(false)
+  completedAt    DateTime?
+  instructorNotes String?
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  tenant         Tenant              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  course         Course              @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  bookings       Booking[]
+  attendance     SessionAttendance[]
+  bundleBookingSessions BundleBookingSession[]
+}
+
+model Customer {
+  id             String              @id @default(cuid())
+  tenantId       String
+  firstName      String
+  lastName       String
+  email          String
+  password       String?             // Hashed password for email/password login (optional - for Google Sign-In)
+  phone          String?
+  company        String?
+  companySize    String?             // e.g., "1-10", "11-50", "51-200", "200+"
+  jobTitle       String?
+  address        String?
+  city           String?
+  postcode       String?
+  googleId       String?             @unique // For Google Sign-In
+  image          String?             // Profile picture from Google
+  emailVerified  DateTime?           // Email verification status
+  isActive       Boolean             @default(true)
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  tenant         Tenant              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  bookings       Booking[]
+  achievements   Achievement[]
+  attendance     SessionAttendance[]
+  accounts       Account[]           // NextAuth accounts
+  sessions       Session[]           // NextAuth sessions
+  bundleBookings BundleBooking[]
+
+  @@unique([tenantId, email]) // Unique email per tenant
+}
+
+model Booking {
+  id              String        @id @default(cuid())
+  tenantId        String
+  customerId      String
+  sessionId       String
+  status          BookingStatus @default(PENDING)
+  specialRequests String?
+  totalAmount     Float
+  depositAmount   Float?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  tenant          Tenant        @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  session         CourseSession @relation(fields: [sessionId], references: [id])
+  customer        Customer      @relation(fields: [customerId], references: [id])
+  payments        Payment[]
+}
+
+model Payment {
+  id                    String        @id @default(cuid())
+  bookingId             String
+  amount                Float
+  status                PaymentStatus @default(PENDING)
+  stripePaymentIntentId String?
+  paymentMethod         String?
+  paidAt                DateTime?
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+  booking               Booking       @relation(fields: [bookingId], references: [id])
+}
+
+// Course Bundle Models
+model Bundle {
+  id                 String         @id @default(cuid())
+  tenantId           String
+  title              String
+  description        String
+  tagline            String?        // e.g., "Perfect for beginners"
+  tier               BundleTier     @default(FOUNDATION)
+  originalPrice      Float          // Sum of individual course prices
+  bundlePrice        Float          // Discounted price
+  savings            Float          // Amount saved
+  discountPercentage Int            // Percentage discount (e.g., 25)
+  features           String?        // JSON array of included features
+  benefits           String?        // JSON array of key benefits
+  isActive           Boolean        @default(true)
+  isPopular          Boolean        @default(false)
+  displayOrder       Int            @default(0)
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+  tenant             Tenant         @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  courses            BundleCourse[]
+  bookings           BundleBooking[]
+
+  @@unique([tenantId, title])
+}
+
+model BundleCourse {
+  id         String   @id @default(cuid())
+  bundleId   String
+  courseId   String
+  displayOrder Int    @default(0)
+  createdAt  DateTime @default(now())
+  bundle     Bundle   @relation(fields: [bundleId], references: [id], onDelete: Cascade)
+  course     Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([bundleId, courseId])
+}
+
+model BundleBooking {
+  id              String              @id @default(cuid())
+  tenantId        String
+  customerId      String
+  bundleId        String
+  status          BookingStatus       @default(PENDING)
+  specialRequests String?
+  totalAmount     Float               // Bundle price paid
+  depositAmount   Float?
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+  tenant          Tenant              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  customer        Customer            @relation(fields: [customerId], references: [id])
+  bundle          Bundle              @relation(fields: [bundleId], references: [id])
+  sessions        BundleBookingSession[]
+  payments        BundlePayment[]
+}
+
+model BundleBookingSession {
+  id                String         @id @default(cuid())
+  bundleBookingId   String
+  sessionId         String
+  courseId          String
+  createdAt         DateTime       @default(now())
+  bundleBooking     BundleBooking  @relation(fields: [bundleBookingId], references: [id], onDelete: Cascade)
+  session           CourseSession  @relation(fields: [sessionId], references: [id])
+
+  @@unique([bundleBookingId, sessionId])
+}
+
+model BundlePayment {
+  id                    String         @id @default(cuid())
+  bundleBookingId       String
+  amount                Float
+  status                PaymentStatus  @default(PENDING)
+  stripePaymentIntentId String?
+  paymentMethod         String?
+  paidAt                DateTime?
+  createdAt             DateTime       @default(now())
+  updatedAt             DateTime       @updatedAt
+  bundleBooking         BundleBooking  @relation(fields: [bundleBookingId], references: [id])
+}
+
+enum BundleTier {
+  FOUNDATION
+  PROFESSIONAL
+  SPECIALIST
+  MASTER
+  ELITE
+}
+
+enum CourseCategory {
+  GAS_SAFE
+  HEAT_PUMP
+  OFTEC
+  LPG
+  VAPORIZING
+  WATER
+  FGAS_AIR_CONDITIONING
+  COMMERCIAL_CATERING
+  COMMERCIAL_LAUNDRY
+  COMMERCIAL_GAS
+  COMMERCIAL_CORE
+  ELECTRICAL
+  REFRIGERATION
+  CUSTOM               // For custom tenant-specific categories
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+enum AttendanceStatus {
+  REGISTERED
+  ATTENDED
+  PARTIAL
+  ABSENT
+  PASSED
+  FAILED
+}
+
+model Achievement {
+  id                String          @id @default(cuid())
+  tenantId          String
+  customerId        String
+  courseId          String
+  sessionId         String?
+  achievedAt        DateTime        @default(now())
+  level             AchievementLevel
+  category          CourseCategory
+  certificationDate DateTime        @default(now())
+  expiryDate        DateTime?
+  isExpired         Boolean         @default(false)
+  remindersSent     Int             @default(0)
+  nextReminderDate  DateTime?
+  certificateNumber String?
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  tenant            Tenant          @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  customer          Customer        @relation(fields: [customerId], references: [id])
+  course            Course          @relation(fields: [courseId], references: [id])
+  reminders         CertificationReminder[]
+  
+  @@unique([tenantId, customerId, courseId]) // Unique per tenant
+}
+
+model SessionAttendance {
+  id           String               @id @default(cuid())
+  sessionId    String
+  customerId   String
+  status       AttendanceStatus     @default(REGISTERED)
+  attendedDays Int                  @default(0)
+  totalDays    Int                  @default(1)
+  passed       Boolean              @default(false)
+  grade        String?
+  notes        String?
+  certificateIssued Boolean         @default(false)
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+  session      CourseSession        @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  customer     Customer             @relation(fields: [customerId], references: [id])
+  
+  @@unique([sessionId, customerId])
+}
+
+enum AchievementLevel {
+  BRONZE
+  SILVER
+  GOLD
+  ELITE
+}
+
+model AdminUser {
+  id          String      @id @default(cuid())
+  tenantId    String?     // Null for SUPER_ADMIN (platform admins)
+  email       String      @unique
+  passwordHash String
+  firstName   String
+  lastName    String
+  role        AdminRole   @default(STAFF)
+  isActive    Boolean     @default(true)
+  lastLoginAt DateTime?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  tenant      Tenant?     @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+}
+
+enum AdminRole {
+  SUPER_ADMIN
+  MANAGER
+  STAFF
+  INSTRUCTOR
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  email     String
+  token     String   @unique
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([email])
+  @@index([token])
+}
+
+model SystemSettings {
+  id                    String   @id @default("main")
+  companyName           String   @default("ACME Training Centre")
+  companyAddress        String?
+  companyPhone          String?
+  companyEmail          String?
+  companyWebsite        String?
+  defaultMaxStudents    Int      @default(12)
+  defaultSessionLength  Int      @default(8) // hours
+  bookingWindowDays     Int      @default(30) // days in advance
+  cancellationHours     Int      @default(24) // hours before session
+  depositPercentage     Float    @default(0.3) // 30% deposit
+  emailNotificationsEnabled Boolean @default(true)
+  smtpHost              String?
+  smtpPort              Int      @default(587)
+  smtpUser              String?
+  smtpPassword          String?
+  smtpSecure            Boolean  @default(true)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+model CertificationRule {
+  id              String         @id @default(cuid())
+  category        CourseCategory @unique
+  validityYears   Int            @default(5)
+  reminderMonths  String         @default("6,3,1") // months before expiry
+  isActive        Boolean        @default(true)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+}
+
+model CertificationReminder {
+  id            String           @id @default(cuid())
+  tenantId      String
+  achievementId String
+  reminderType  ReminderType
+  scheduledFor  DateTime
+  sentAt        DateTime?
+  emailSent     Boolean          @default(false)
+  smsSent       Boolean          @default(false)
+  emailSubject  String?
+  emailContent  String?
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  tenant        Tenant           @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  achievement   Achievement      @relation(fields: [achievementId], references: [id], onDelete: Cascade)
+}
+
+model EmailTemplate {
+  id              String         @id @default(cuid())
+  tenantId        String
+  name            String
+  category        CourseCategory?
+  reminderType    ReminderType
+  subject         String
+  htmlContent     String
+  textContent     String
+  isActive        Boolean        @default(true)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  tenant          Tenant         @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  
+  @@unique([tenantId, name]) // Unique per tenant
+}
+
+enum ReminderType {
+  SIX_MONTHS
+  THREE_MONTHS
+  ONE_MONTH
+  ONE_WEEK
+  EXPIRED
+  CUSTOM
+}
+
+// NextAuth.js Models
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  user              Customer @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  user         Customer @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+  createdAt  DateTime @default(now())
+
+  @@unique([identifier, token])
+}
+
+// SaaS Subscription Billing Models
+model TenantSubscription {
+  id                    String              @id @default(cuid())
+  tenantId              String              @unique
+  stripeSubscriptionId  String              @unique // Stripe subscription ID
+  stripePriceId         String              // Stripe price ID
+  stripeCustomerId      String              // Stripe customer ID
+  status                SubscriptionStatus
+  currentPeriodStart    DateTime
+  currentPeriodEnd      DateTime
+  trialStart            DateTime?
+  trialEnd              DateTime?
+  canceledAt            DateTime?
+  cancelAtPeriodEnd     Boolean             @default(false)
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
+  tenant                Tenant              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  invoices              SubscriptionInvoice[]
+}
+
+model SubscriptionInvoice {
+  id                   String            @id @default(cuid())
+  subscriptionId       String
+  stripeInvoiceId      String            @unique
+  status               InvoiceStatus
+  amountPaid           Float
+  amountDue            Float
+  currency             String            @default("gbp")
+  invoiceUrl           String?
+  paidAt               DateTime?
+  dueDate              DateTime?
+  createdAt            DateTime          @default(now())
+  updatedAt            DateTime          @updatedAt
+  subscription         TenantSubscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+}
+
+model SubscriptionEvent {
+  id                String            @id @default(cuid())
+  tenantId          String?
+  subscriptionId    String?
+  stripeEventId     String            @unique
+  eventType         String            // e.g., "customer.subscription.created"
+  processed         Boolean           @default(false)
+  data              String            // JSON data from Stripe
+  createdAt         DateTime          @default(now())
+  processedAt       DateTime?
+}
+
+// SaaS Business Models  
+model PlatformSettings {
+  id                    String   @id @default("main")
+  companyName           String   @default("Training Platform SaaS")
+  supportEmail          String   @default("support@example.com")
+  stripePublishableKey  String?
+  stripeSecretKey       String?  // encrypted
+  stripeWebhookSecret   String?  // encrypted
+  trialDays             Int      @default(14)
+  defaultPlan           TenantPlan @default(STARTER)
+  maintenanceMode       Boolean  @default(false)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+enum SubscriptionStatus {
+  TRIAL
+  ACTIVE
+  PAST_DUE
+  CANCELED
+  UNPAID
+  INCOMPLETE
+  INCOMPLETE_EXPIRED
+}
+
+enum InvoiceStatus {
+  DRAFT
+  OPEN
+  PAID
+  UNCOLLECTIBLE
+  VOID
 }

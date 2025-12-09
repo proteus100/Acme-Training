@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.acme-training.co.uk)",
+      "Bash(npx create-next-app:*)",
+      "Read(//Users/davidpatheyjohns/Documents/**)",
+      "Bash(npm install:*)",
+      "Bash(npx prisma:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(npm run dev:*)",
+      "Bash(npx tsx:*)",
+      "Bash(git restore:*)",
+      "Bash(git checkout:*)",
+      "Bash(node:*)",
+      "Bash(sqlite3:*)",
+      "Bash(curl:*)",
+      "Bash(npm cache clean:*)",
+      "Bash(npx playwright:*)",
+      "Bash(npm run test:smoke:*)",
+      "Bash(npm run test:links:*)",
+      "Read(//Volumes/**)",
+      "Bash(pkill:*)",
+      "Bash(cat:*)",
+      "Read(//Users/davidpatheyjohns/Downloads/**)",
+      "Bash(lsof:*)",
+      "Bash(kill:*)",
+      "Bash(ssh:*)",
+      "Read(//Users/davidpatheyjohns/.ssh/**)",
+      "Bash(ssh-copy-id:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
