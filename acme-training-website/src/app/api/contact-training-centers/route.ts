@@ -77,16 +77,24 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Check if Resend is configured
+    if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 'your-resend-api-key-here') {
+      return NextResponse.json(
+        { error: 'Email service not configured' },
+        { status: 500 }
+      )
+    }
+
     // Initialize Resend
     const resend = new Resend(process.env.RESEND_API_KEY)
-    
+
     // Generate email templates
     const notificationEmail = generateNotificationEmail(data)
     const confirmationEmail = generateConfirmationEmail(data)
 
     try {
       // Send notification email to your team
-      if (process.env.RESEND_API_KEY && process.env.RESEND_API_KEY !== 'your-resend-api-key-here') {
+      if (process.env.RESEND_API_KEY) {
         await resend.emails.send({
           from: process.env.FROM_EMAIL || 'partnerships@acme-training.co.uk',
           to: [process.env.TO_EMAIL || 'info@acme-training.co.uk'],
