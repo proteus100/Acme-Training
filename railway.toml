@@ -1,0 +1,8 @@
+[build]
+builder = "NIXPACKS"
+buildCommand = "cd acme-training-website && npm install && npm run build"
+
+[deploy]
+startCommand = "cd acme-training-website && npm start"
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
