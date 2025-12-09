@@ -6,13 +6,7 @@ RUN apk add --no-cache libc6-compat openssl
 
 WORKDIR /app
 
-# Copy root package.json
-COPY package*.json ./
-
-# Install dependencies for the monorepo
-RUN npm install
-
-# Copy everything
+# Copy everything first
 COPY . .
 
 # Build the application
