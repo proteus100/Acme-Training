@@ -1,11 +1,11 @@
 [phases.setup]
-nixPkgs = ["nodejs_20", "npm-9_x"]
+nixPkgs = ["nodejs_20"]
 
 [phases.install]
-cmds = ["cd acme-training-website && npm ci --cache .npm --prefer-offline"]
+cmds = ["cd acme-training-website && npm install --legacy-peer-deps"]
 
 [phases.build]
-cmds = ["cd acme-training-website && npm run build"]
+cmds = ["cd acme-training-website && npx prisma generate", "cd acme-training-website && npm run build"]
 
 [start]
 cmd = "cd acme-training-website && npm start"
