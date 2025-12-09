@@ -1,4 +1,4 @@
-# TrainKit Railway Deployment Reference
+# ACME Training Railway Deployment Reference
 
 ## Project Structure
 ```
@@ -16,7 +16,7 @@ Acme-training.co.uk/
 **IMPORTANT**: The actual Next.js app is inside `acme-training-website/` subdirectory, not at root.
 
 ## GitHub Repository
-- **URL**: https://github.com/proteus100/trainkit
+- **URL**: https://github.com/proteus100/Acme-Training
 - **Branch**: master
 
 ## Railway Deployment Steps
@@ -26,7 +26,7 @@ Acme-training.co.uk/
 2. Login with GitHub (proteus100)
 3. Click "New Project"
 4. Select "Deploy from GitHub repo"
-5. Choose: **proteus100/trainkit**
+5. Choose: **proteus100/Acme-Training**
 
 ### 2. Configure Root Directory
 Railway needs to know the app is in a subdirectory:
@@ -35,7 +35,7 @@ Railway needs to know the app is in a subdirectory:
 - The `railway.toml` file at root tells Railway to build from `acme-training-website/`
 
 **Option B: Manual Settings**
-1. Click on the trainkit service
+1. Click on the service
 2. Go to "Settings" tab
 3. Find "Root Directory" setting
 4. Set to: `acme-training-website`
@@ -48,7 +48,7 @@ Railway needs to know the app is in a subdirectory:
 4. Railway auto-provisions it
 
 ### 4. Configure Environment Variables
-Go to trainkit service → Variables tab, add these:
+Go to service → Variables tab, add these:
 
 #### Required Variables:
 
@@ -84,10 +84,10 @@ NODE_ENV=production
 
 ### 5. Get Railway App URL
 After deployment:
-1. Click on your trainkit service
+1. Click on your service
 2. Go to "Settings" tab
 3. Find "Domains" section
-4. Copy the Railway-provided URL (e.g., `trainkit-production-xxxx.railway.app`)
+4. Copy the Railway-provided URL (e.g., `acme-training-production-xxxx.railway.app`)
 5. Update `NEXTAUTH_URL` and `NEXT_PUBLIC_APP_URL` with this URL
 
 ### 6. Run Database Migrations
@@ -110,7 +110,7 @@ railway run npx prisma db seed  # Optional: seed initial data
 ```
 
 **Option B: Using Railway Shell**
-1. In Railway dashboard, click on trainkit service
+1. In Railway dashboard, click on your service
 2. Click "Shell" or "Console" tab
 3. Run:
 ```bash
@@ -184,7 +184,7 @@ npm run dev
 
 ### "Invalid NEXTAUTH_URL"
 - **Cause**: NEXTAUTH_URL not set or wrong
-- **Fix**: Set to your Railway app URL (e.g., `https://trainkit-production-xxxx.railway.app`)
+- **Fix**: Set to your Railway app URL (e.g., `https://acme-training-production-xxxx.railway.app`)
 
 ## Important Notes
 1. **Never commit .env files** - They're in .gitignore
@@ -195,7 +195,7 @@ npm run dev
 
 ## Support & Resources
 - Railway Docs: https://docs.railway.app/
-- TrainKit Docs: See other .md files in this repo
+- ACME Training Docs: See other .md files in this repo
 - Stripe Docs: https://stripe.com/docs
 - Prisma Docs: https://www.prisma.io/docs
 
@@ -205,4 +205,4 @@ npm run dev
 
 ---
 Last updated: 2025-12-09
-Deployed from: https://github.com/proteus100/trainkit
+Deployed from: https://github.com/proteus100/Acme-Training
