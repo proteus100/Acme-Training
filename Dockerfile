@@ -14,14 +14,13 @@ ARG NEXTAUTH_URL
 ARG NEXT_PUBLIC_APP_URL
 ARG DATABASE_URL
 
-# Set as environment variables for build
+# Set as environment variables for build (NOT NODE_ENV yet)
 ENV RESEND_API_KEY=$RESEND_API_KEY
 ENV NEXTAUTH_SECRET=$NEXTAUTH_SECRET
 ENV JWT_SECRET=$JWT_SECRET
 ENV NEXTAUTH_URL=$NEXTAUTH_URL
 ENV NEXT_PUBLIC_APP_URL=$NEXT_PUBLIC_APP_URL
 ENV DATABASE_URL=$DATABASE_URL
-ENV NODE_ENV=production
 
 # Copy everything first
 COPY . .
@@ -32,8 +31,11 @@ WORKDIR /app/acme-training-website
 # Configure npm to use legacy-peer-deps globally
 RUN npm config set legacy-peer-deps true
 
-# Install dependencies
+# Install ALL dependencies (including devDependencies for TypeScript)
 RUN npm install
+
+# Now set NODE_ENV for the build
+ENV NODE_ENV=production
 
 # Generate Prisma client
 RUN npx prisma generate
