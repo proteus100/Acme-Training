@@ -36,11 +36,17 @@ RUN npm install
 
 # Now set NODE_ENV for the build
 ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV SKIP_ENV_VALIDATION=1
 
 # Generate Prisma client
 RUN npx prisma generate
 
-# Build Next.js
+# Debug: Print environment variables (remove sensitive details in log)
+RUN echo "Building with RESEND_API_KEY: ${RESEND_API_KEY:0:10}..." && \
+    echo "NODE_ENV: $NODE_ENV"
+
+# Build Next.js with minimal static generation
 RUN npm run build
 
 # Production stage
