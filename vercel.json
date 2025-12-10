@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "buildCommand": "cd acme-training-website && npm install && npx prisma generate && npm run build",
+  "outputDirectory": "acme-training-website/.next",
+  "installCommand": "cd acme-training-website && npm install",
+  "framework": "nextjs",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/acme-training-website/$1"
+    }
+  ]
+}

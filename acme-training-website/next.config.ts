@@ -12,6 +12,7 @@ const nextConfig: NextConfig = {
     serverActions: {
       bodySizeLimit: '2mb',
     },
+    outputFileTracingRoot: require('path').join(__dirname, '../'),
   },
   output: 'standalone',
   // Skip all page data collection during build

@@ -48,8 +48,8 @@ export async function POST(request: NextRequest) {
     // Dynamic import of Stripe to prevent ANY build-time execution
     const { default: Stripe } = await import('stripe')
 
-    // Initialize Stripe at runtime, not at module level
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+    // Initialize Stripe at runtime with dummy key if missing (won't be used at build time)
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_dummy_for_build_only', {
       apiVersion: '2024-06-20',
     })
 
