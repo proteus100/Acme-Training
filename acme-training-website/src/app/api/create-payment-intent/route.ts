@@ -3,9 +3,8 @@ import Stripe from 'stripe'
 import { prisma } from '../../../lib/prisma'
 import { z } from 'zod'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2024-06-20',
-})
+// Force this route to be dynamic
+export const dynamic = 'force-dynamic'
 
 // Schema for single course booking
 const createPaymentSchema = z.object({
@@ -46,15 +45,20 @@ const createBundlePaymentSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
+    // Initialize Stripe at runtime, not at module level
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+      apiVersion: '2024-06-20',
+    })
+
     const body = await request.json()
 
     // Determine if it's a bundle or single course booking
     const isBundle = 'bundleId' in body
 
     if (isBundle) {
-      return handleBundleBooking(body)
+      return handleBundleBooking(body, stripe)
     } else {
-      return handleSingleCourseBooking(body)
+      return handleSingleCourseBooking(body, stripe)
     }
 
   } catch (error) {
@@ -69,7 +73,7 @@ export async function POST(request: NextRequest) {
 }
 
 // Handle single course booking
-async function handleSingleCourseBooking(body: any) {
+async function handleSingleCourseBooking(body: any, stripe: Stripe) {
   const data = createPaymentSchema.parse(body)
 
   // Get course and session details
@@ -164,7 +168,7 @@ async function handleSingleCourseBooking(body: any) {
 }
 
 // Handle bundle booking
-async function handleBundleBooking(body: any) {
+async function handleBundleBooking(body: any, stripe: Stripe) {
   const data = createBundlePaymentSchema.parse(body)
 
   console.log('[Payment Intent] Creating bundle booking:', data.bundleId)

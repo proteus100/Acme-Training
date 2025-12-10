@@ -4,21 +4,25 @@ import { prisma } from '@/lib/prisma'
 import nodemailer from 'nodemailer'
 import crypto from 'crypto'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2024-06-20',
-})
-
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: parseInt(process.env.SMTP_PORT || '587'),
-  secure: false,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASSWORD,
-  },
-})
+// Force this route to be dynamic
+export const dynamic = 'force-dynamic'
 
 export async function POST(request: NextRequest) {
+  // Initialize Stripe at runtime, not at module level
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+    apiVersion: '2024-06-20',
+  })
+
+  const transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: parseInt(process.env.SMTP_PORT || '587'),
+    secure: false,
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASSWORD,
+    },
+  })
+
   try {
     const { paymentIntentId } = await request.json()
     
