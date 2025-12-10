@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
-import Stripe from 'stripe'
 import { prisma } from '../../../lib/prisma'
 import { z } from 'zod'
 
 // Force this route to be dynamic
 export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
 
 // Schema for single course booking
 const createPaymentSchema = z.object({
@@ -45,6 +45,9 @@ const createBundlePaymentSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
+    // Dynamic import of Stripe to prevent ANY build-time execution
+    const { default: Stripe } = await import('stripe')
+
     // Initialize Stripe at runtime, not at module level
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
       apiVersion: '2024-06-20',
@@ -73,7 +76,7 @@ export async function POST(request: NextRequest) {
 }
 
 // Handle single course booking
-async function handleSingleCourseBooking(body: any, stripe: Stripe) {
+async function handleSingleCourseBooking(body: any, stripe: any) {
   const data = createPaymentSchema.parse(body)
 
   // Get course and session details
@@ -168,7 +171,7 @@ async function handleSingleCourseBooking(body: any, stripe: Stripe) {
 }
 
 // Handle bundle booking
-async function handleBundleBooking(body: any, stripe: Stripe) {
+async function handleBundleBooking(body: any, stripe: any) {
   const data = createBundlePaymentSchema.parse(body)
 
   console.log('[Payment Intent] Creating bundle booking:', data.bundleId)

@@ -1,19 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server'
-import Stripe from 'stripe'
 import { prisma } from '@/lib/prisma'
-import nodemailer from 'nodemailer'
 import crypto from 'crypto'
 
 // Force this route to be dynamic
 export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
 
 export async function POST(request: NextRequest) {
+  // Dynamic import of Stripe to prevent ANY build-time execution
+  const { default: Stripe } = await import('stripe')
+  const nodemailer = await import('nodemailer')
+
   // Initialize Stripe at runtime, not at module level
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
     apiVersion: '2024-06-20',
   })
 
-  const transporter = nodemailer.createTransport({
+  const transporter = nodemailer.default.createTransport({
     host: process.env.SMTP_HOST,
     port: parseInt(process.env.SMTP_PORT || '587'),
     secure: false,
