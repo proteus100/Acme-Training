@@ -40,7 +40,8 @@
       "Bash(vercel)",
       "Bash(vercel login)",
       "Bash(openssl rand:*)",
-      "Bash(npm i:*)"
+      "Bash(npm i:*)",
+      "WebFetch(domain:github.com)"
     ],
     "deny": [],
     "ask": []
