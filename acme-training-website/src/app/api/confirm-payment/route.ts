@@ -1,20 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import crypto from 'crypto'
+import { getStripeInstance } from '@/lib/stripe-runtime'
 
-// Force this route to be dynamic
+// Force this route to be dynamic - NEVER pre-render
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
+export const revalidate = 0
 
 export async function POST(request: NextRequest) {
-  // Dynamic import of Stripe to prevent ANY build-time execution
-  const { default: Stripe } = await import('stripe')
+  // Use lazy-loaded Stripe instance - guaranteed to only run at request time
+  const stripe = await getStripeInstance()
   const nodemailer = await import('nodemailer')
 
-  // Initialize Stripe at runtime with dummy key if missing (won't be used at build time)
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_dummy_for_build_only', {
-    apiVersion: '2024-06-20',
-  })
+  if (!stripe) {
+    return NextResponse.json({ error: 'Payment service unavailable' }, { status: 503 })
+  }
 
   const transporter = nodemailer.default.createTransport({
     host: process.env.SMTP_HOST,
