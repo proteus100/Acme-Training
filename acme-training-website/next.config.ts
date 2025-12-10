@@ -15,6 +15,14 @@ const nextConfig: NextConfig = {
     outputFileTracingRoot: require('path').join(__dirname, '../'),
   },
   output: 'standalone',
+  // Externalize Stripe to prevent build-time bundling
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      config.externals = config.externals || []
+      config.externals.push('stripe')
+    }
+    return config
+  },
   // Skip all page data collection during build
   generateBuildId: async () => {
     return 'build-' + Date.now()
