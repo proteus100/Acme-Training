@@ -39,7 +39,8 @@
       "Bash(git rm:*)",
       "Bash(vercel)",
       "Bash(vercel login)",
-      "Bash(openssl rand:*)"
+      "Bash(openssl rand:*)",
+      "Bash(npm i:*)"
     ],
     "deny": [],
     "ask": []
