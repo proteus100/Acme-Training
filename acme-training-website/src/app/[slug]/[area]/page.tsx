@@ -383,20 +383,27 @@ export default async function TenantAreaPage({ params }: PageProps) {
 
 // Generate static paths for common areas
 export async function generateStaticParams() {
-  const tenants = await prisma.tenant.findMany({
-    where: { active: true },
-    select: { slug: true }
-  })
+  try {
+    const tenants = await prisma.tenant.findMany({
+      where: { active: true },
+      select: { slug: true }
+    })
 
-  const paths = []
-  for (const tenant of tenants) {
-    for (const area of VALID_AREAS) {
-      paths.push({
-        slug: tenant.slug,
-        area: area
-      })
+    const paths = []
+    for (const tenant of tenants) {
+      for (const area of VALID_AREAS) {
+        paths.push({
+          slug: tenant.slug,
+          area: area
+        })
+      }
     }
-  }
 
-  return paths
+    return paths
+  } catch (error) {
+    // Database not available during build - return empty array
+    // Pages will be generated on-demand at runtime
+    console.log('Database not available during build, skipping static generation')
+    return []
+  }
 }
