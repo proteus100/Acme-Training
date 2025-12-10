@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { Resend } from 'resend'
 import { generateNotificationEmail, generateConfirmationEmail } from '@/lib/email-templates'
+
+// Force this route to be dynamic to avoid build-time API key checks
+export const dynamic = 'force-dynamic'
 
 interface ContactFormData {
   // Lead Qualification
@@ -78,14 +80,15 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if Resend is configured
-    if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 'your-resend-api-key-here') {
+    if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 'your-resend-api-key-here' || process.env.RESEND_API_KEY === 're_dummy_for_build') {
       return NextResponse.json(
         { error: 'Email service not configured' },
         { status: 500 }
       )
     }
 
-    // Initialize Resend
+    // Dynamically import and initialize Resend only at runtime
+    const { Resend } = await import('resend')
     const resend = new Resend(process.env.RESEND_API_KEY)
 
     // Generate email templates
