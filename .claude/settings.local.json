@@ -36,7 +36,10 @@
       "Bash(PORT=3001 npm run start:*)",
       "Bash(PORT=3002 npm run start:*)",
       "Read(//Users/davidpatheyjohns/**)",
-      "Bash(git rm:*)"
+      "Bash(git rm:*)",
+      "Bash(vercel)",
+      "Bash(vercel login)",
+      "Bash(openssl rand:*)"
     ],
     "deny": [],
     "ask": []
