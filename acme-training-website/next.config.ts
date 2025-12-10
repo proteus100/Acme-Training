@@ -12,8 +12,8 @@ const nextConfig: NextConfig = {
     serverActions: {
       bodySizeLimit: '2mb',
     },
-    outputFileTracingRoot: require('path').join(__dirname, '../'),
   },
+  outputFileTracingRoot: require('path').join(__dirname, '../'),
   output: 'standalone',
   // Externalize Stripe to prevent build-time bundling
   webpack: (config, { isServer }) => {
