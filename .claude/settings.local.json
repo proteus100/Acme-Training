@@ -27,7 +27,16 @@
       "Bash(kill:*)",
       "Bash(ssh:*)",
       "Read(//Users/davidpatheyjohns/.ssh/**)",
-      "Bash(ssh-copy-id:*)"
+      "Bash(ssh-copy-id:*)",
+      "Bash(git remote add:*)",
+      "Bash(git push:*)",
+      "Bash(mv:*)",
+      "Bash(npm run start)",
+      "Bash(npm run:*)",
+      "Bash(PORT=3001 npm run start:*)",
+      "Bash(PORT=3002 npm run start:*)",
+      "Read(//Users/davidpatheyjohns/**)",
+      "Bash(git rm:*)"
     ],
     "deny": [],
     "ask": []
