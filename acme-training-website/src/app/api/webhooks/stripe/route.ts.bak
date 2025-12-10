@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
+import Stripe from 'stripe'
 import { prisma } from '../../../../lib/prisma'
-import { getStripeInstance } from '../../../../lib/stripe-runtime'
 
-// Force dynamic
-export const dynamic = 'force-dynamic'
-export const runtime = 'nodejs'
-export const revalidate = 0
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: '2024-11-20.acacia',
+})
+
+const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET!
 
 // GET handler for Stripe webhook URL validation
 export async function GET() {
@@ -16,18 +17,10 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
-  // Load Stripe at runtime
-  const stripe = await getStripeInstance()
-
-  if (!stripe) {
-    return NextResponse.json({ error: 'Payment service unavailable' }, { status: 503 })
-  }
-
-  const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET!
   const body = await request.text()
   const sig = request.headers.get('stripe-signature')!
 
-  let event: any
+  let event: Stripe.Event
 
   try {
     event = stripe.webhooks.constructEvent(body, sig, endpointSecret)

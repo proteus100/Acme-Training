@@ -1,19 +1,28 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import Stripe from 'stripe'
 import { nanoid } from 'nanoid'
 import crypto from 'crypto'
 import { hashPassword } from '@/lib/auth'
 import { sendEmail } from '@/lib/email'
 import { generateTenantWelcomeEmail } from '@/lib/email-templates'
+import { getStripeInstance } from '@/lib/stripe-runtime'
 
-// Initialize Stripe
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2024-11-20.acacia',
-})
+// Force this route to be dynamic
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+export const revalidate = 0
 
 // POST /api/onboarding - Complete tenant onboarding with payment
 export async function POST(request: NextRequest) {
+  // Load Stripe at runtime only
+  const stripe = await getStripeInstance()
+
+  if (!stripe) {
+    return NextResponse.json(
+      { success: false, error: 'Payment service unavailable' },
+      { status: 503 }
+    )
+  }
   try {
     const body = await request.json()
     const {

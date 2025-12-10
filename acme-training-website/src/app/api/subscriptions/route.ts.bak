@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { getStripeInstance } from '@/lib/stripe-runtime'
+import Stripe from 'stripe'
 
-// Force dynamic
-export const dynamic = 'force-dynamic'
-export const runtime = 'nodejs'
-export const revalidate = 0
+// Initialize Stripe
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: '2024-11-20.acacia',
+})
 
 // GET /api/subscriptions - Get all active subscriptions
 export async function GET() {
