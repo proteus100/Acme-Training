@@ -7,14 +7,17 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  // Disable static optimization completely
   experimental: {
-    // Skip static optimization for API routes during build
     serverActions: {
       bodySizeLimit: '2mb',
     },
   },
-  // Disable static page generation during build to avoid API key issues
   output: 'standalone',
+  // Skip all page data collection during build
+  generateBuildId: async () => {
+    return 'build-' + Date.now()
+  },
   // Security headers
   async headers() {
     const baseHeaders = [

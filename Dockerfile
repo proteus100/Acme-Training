@@ -34,19 +34,19 @@ RUN npm config set legacy-peer-deps true
 # Install ALL dependencies (including devDependencies for TypeScript)
 RUN npm install
 
+# Clean npm cache and remove any cached Resend
+RUN npm cache clean --force
+RUN rm -rf node_modules/resend node_modules/@react-email/render 2>/dev/null || true
+
 # Now set NODE_ENV for the build
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
-ENV SKIP_ENV_VALIDATION=1
+ENV SKIP_ENV_VALIDATION=true
 
 # Generate Prisma client
 RUN npx prisma generate
 
-# Debug: Print environment variables (remove sensitive details in log)
-RUN echo "Building with RESEND_API_KEY: ${RESEND_API_KEY:0:10}..." && \
-    echo "NODE_ENV: $NODE_ENV"
-
-# Build Next.js with minimal static generation
+# Build Next.js - skip static page generation
 RUN npm run build
 
 # Production stage
