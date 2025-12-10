@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { generateNotificationEmail, generateConfirmationEmail } from '@/lib/email-templates'
 
-// Force this route to be dynamic to avoid build-time API key checks
+// Force this route to be dynamic
 export const dynamic = 'force-dynamic'
 
 interface ContactFormData {
@@ -79,50 +78,15 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Check if Resend is configured
-    if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 'your-resend-api-key-here' || process.env.RESEND_API_KEY === 're_dummy_for_build') {
-      return NextResponse.json(
-        { error: 'Email service not configured' },
-        { status: 500 }
-      )
-    }
+    // Email service temporarily disabled - log submission instead
+    console.log('📧 Contact form submission received (email disabled during deployment):', {
+      organization: data.organizationName,
+      email: data.email,
+      phone: data.phone,
+      type: data.organizationType
+    })
 
-    // Dynamically import and initialize Resend only at runtime
-    const { Resend } = await import('resend')
-    const resend = new Resend(process.env.RESEND_API_KEY)
-
-    // Generate email templates
-    const notificationEmail = generateNotificationEmail(data)
-    const confirmationEmail = generateConfirmationEmail(data)
-
-    try {
-      // Send notification email to your team
-      if (process.env.RESEND_API_KEY) {
-        await resend.emails.send({
-          from: process.env.FROM_EMAIL || 'partnerships@acme-training.co.uk',
-          to: [process.env.TO_EMAIL || 'info@acme-training.co.uk'],
-          subject: notificationEmail.subject,
-          html: notificationEmail.html,
-          text: notificationEmail.text,
-        })
-
-        // Send confirmation email to the contact
-        await resend.emails.send({
-          from: process.env.FROM_EMAIL || 'partnerships@acme-training.co.uk',
-          to: [data.email],
-          subject: confirmationEmail.subject,
-          html: confirmationEmail.html,
-          text: confirmationEmail.text,
-        })
-      } else {
-        console.log('📧 Email would be sent (Resend not configured):')
-        console.log('Notification:', notificationEmail.subject)
-        console.log('Confirmation to:', data.email)
-      }
-    } catch (emailError) {
-      console.error('Email sending failed:', emailError)
-      // Don't fail the request if email fails - log it and continue
-    }
+    // Email sending code removed - to be implemented with SMTP later
 
     // Log the submission for tracking
     console.log('Training Center Partnership Inquiry:', {
