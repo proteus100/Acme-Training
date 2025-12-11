@@ -41,7 +41,13 @@
       "Bash(vercel login)",
       "Bash(openssl rand:*)",
       "Bash(npm i:*)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Bash(DATABASE_URL=\"postgresql://neondb_owner:npg_tF0BGsm1ZKef@ep-holy-hall-abg4t8i1-pooler.eu-west-2.aws.neon.tech/neondb?connect_timeout=15&sslmode=require\" npx tsx:*)",
+      "Bash(DATABASE_URL=\"postgresql://neondb_owner:npg_tF0BGsm1ZKef@ep-holy-hall-abg4t8i1-pooler.eu-west-2.aws.neon.tech/neondb?connect_timeout=15&sslmode=require\" npx prisma:*)",
+      "Bash(DATABASE_URL=\"postgresql://neondb_owner:npg_tF0BGsm1ZKef@ep-holy-hall-abg4t8i1-pooler.eu-west-2.aws.neon.tech/neondb?connect_timeout=15&sslmode=require\" node:*)",
+      "Bash(DATABASE_URL=\"postgresql://neondb_owner:npg_tF0BGsm1ZKef@ep-holy-hall-abg4t8i1-pooler.eu-west-2.aws.neon.tech/neondb?connect_timeout=15&sslmode=require\" npx prisma db push:*)",
+      "Bash(git mv:*)",
+      "Bash(git fetch:*)"
     ],
     "deny": [],
     "ask": []

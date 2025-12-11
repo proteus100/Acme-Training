@@ -70,11 +70,10 @@ ENV JWT_SECRET=$JWT_SECRET
 ENV NEXTAUTH_URL=$NEXTAUTH_URL
 ENV NEXT_PUBLIC_APP_URL=$NEXT_PUBLIC_APP_URL
 
-# Copy built application
-COPY --from=base /app/acme-training-website/.next ./acme-training-website/.next
+# Copy standalone output (includes full app structure)
+COPY --from=base /app/acme-training-website/.next/standalone/acme-training-website ./acme-training-website
+COPY --from=base /app/acme-training-website/.next/static ./acme-training-website/.next/static
 COPY --from=base /app/acme-training-website/public ./acme-training-website/public
-COPY --from=base /app/acme-training-website/package*.json ./acme-training-website/
-COPY --from=base /app/acme-training-website/node_modules ./acme-training-website/node_modules
 COPY --from=base /app/acme-training-website/prisma ./acme-training-website/prisma
 
 # Set working directory
@@ -86,5 +85,5 @@ EXPOSE 3000
 ENV NODE_ENV=production
 ENV PORT=3000
 
-# Start the application
-CMD ["npm", "start"]
+# Start the application (standalone mode uses server.js)
+CMD ["node", "server.js"]
