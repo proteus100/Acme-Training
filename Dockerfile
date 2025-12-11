@@ -56,6 +56,20 @@ WORKDIR /app
 # Install runtime dependencies for Prisma
 RUN apk add --no-cache openssl
 
+# Accept runtime environment variables
+ARG DATABASE_URL
+ARG NEXTAUTH_SECRET
+ARG JWT_SECRET
+ARG NEXTAUTH_URL
+ARG NEXT_PUBLIC_APP_URL
+
+# Set runtime environment variables
+ENV DATABASE_URL=$DATABASE_URL
+ENV NEXTAUTH_SECRET=$NEXTAUTH_SECRET
+ENV JWT_SECRET=$JWT_SECRET
+ENV NEXTAUTH_URL=$NEXTAUTH_URL
+ENV NEXT_PUBLIC_APP_URL=$NEXT_PUBLIC_APP_URL
+
 # Copy built application
 COPY --from=base /app/acme-training-website/.next ./acme-training-website/.next
 COPY --from=base /app/acme-training-website/public ./acme-training-website/public
