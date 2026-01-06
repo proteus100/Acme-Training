@@ -7,10 +7,10 @@ Add these to Vercel → Settings → Environment Variables:
 ### Database
 ```
 DATABASE_URL
-postgresql://neondb_owner:npg_tF0BGsm1ZKef@ep-holy-hall-abg4t8i1-pooler.eu-west-2.aws.neon.tech/neondb?sslmode=require
+postgresql://neondb_owner:npg_tF0BGsm1ZKef@ep-holy-hall-abg4t8i1-pooler.eu-west-2.aws.neon.tech/neondb?connect_timeout=15&sslmode=require
 
 POSTGRES_URL_NON_POOLING
-postgresql://neondb_owner:npg_tF0BGsm1ZKef@ep-holy-hall-abg4t8i1.eu-west-2.aws.neon.tech/neondb?sslmode=require
+postgresql://neondb_owner:npg_tF0BGsm1ZKef@ep-holy-hall-abg4t8i1.eu-west-2.aws.neon.tech/neondb?connect_timeout=15&sslmode=require
 ```
 
 ### Email (Resend)
