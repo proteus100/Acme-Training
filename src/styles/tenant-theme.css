@@ -1,0 +1,263 @@
+/* Tenant Dynamic Theme Utilities */
+
+/* Default fallback colors */
+:root {
+  --tenant-primary: #1e40af;
+  --tenant-secondary: #dc2626;
+  --tenant-primary-rgb: 30, 64, 175;
+  --tenant-secondary-rgb: 220, 38, 38;
+}
+
+/* Tenant Primary Colors */
+.bg-tenant-primary {
+  background-color: var(--tenant-primary);
+}
+
+.bg-tenant-primary-50 {
+  background-color: var(--tenant-primary-50, rgba(30, 64, 175, 0.05));
+}
+
+.bg-tenant-primary-100 {
+  background-color: var(--tenant-primary-100, rgba(30, 64, 175, 0.1));
+}
+
+.bg-tenant-primary-200 {
+  background-color: var(--tenant-primary-200, rgba(30, 64, 175, 0.2));
+}
+
+.bg-tenant-primary-600 {
+  background-color: var(--tenant-primary-600, #1d4ed8);
+}
+
+.bg-tenant-primary-700 {
+  background-color: var(--tenant-primary-700, #1e3a8a);
+}
+
+.text-tenant-primary {
+  color: var(--tenant-primary);
+}
+
+.text-tenant-primary-600 {
+  color: var(--tenant-primary-600, #1d4ed8);
+}
+
+.text-tenant-primary-700 {
+  color: var(--tenant-primary-700, #1e3a8a);
+}
+
+.border-tenant-primary {
+  border-color: var(--tenant-primary);
+}
+
+.border-tenant-primary-200 {
+  border-color: var(--tenant-primary-200, rgba(30, 64, 175, 0.2));
+}
+
+/* Tenant Secondary Colors */
+.bg-tenant-secondary {
+  background-color: var(--tenant-secondary);
+}
+
+.bg-tenant-secondary-50 {
+  background-color: var(--tenant-secondary-50, rgba(220, 38, 38, 0.05));
+}
+
+.bg-tenant-secondary-100 {
+  background-color: var(--tenant-secondary-100, rgba(220, 38, 38, 0.1));
+}
+
+.bg-tenant-secondary-600 {
+  background-color: var(--tenant-secondary-600, #dc2626);
+}
+
+.bg-tenant-secondary-700 {
+  background-color: var(--tenant-secondary-700, #b91c1c);
+}
+
+.text-tenant-secondary {
+  color: var(--tenant-secondary);
+}
+
+.text-tenant-secondary-600 {
+  color: var(--tenant-secondary-600, #dc2626);
+}
+
+.text-tenant-secondary-700 {
+  color: var(--tenant-secondary-700, #b91c1c);
+}
+
+.border-tenant-secondary {
+  border-color: var(--tenant-secondary);
+}
+
+/* Hover states */
+.hover\:bg-tenant-primary-600:hover {
+  background-color: var(--tenant-primary-600, #1d4ed8);
+}
+
+.hover\:bg-tenant-primary-700:hover {
+  background-color: var(--tenant-primary-700, #1e3a8a);
+}
+
+.hover\:bg-tenant-secondary-600:hover {
+  background-color: var(--tenant-secondary-600, #dc2626);
+}
+
+.hover\:bg-tenant-secondary-700:hover {
+  background-color: var(--tenant-secondary-700, #b91c1c);
+}
+
+.hover\:text-tenant-primary:hover {
+  color: var(--tenant-primary);
+}
+
+.hover\:text-tenant-secondary:hover {
+  color: var(--tenant-secondary);
+}
+
+/* Focus states */
+.focus\:ring-tenant-primary:focus {
+  --tw-ring-color: var(--tenant-primary);
+}
+
+.focus\:ring-tenant-secondary:focus {
+  --tw-ring-color: var(--tenant-secondary);
+}
+
+.focus\:border-tenant-primary:focus {
+  border-color: var(--tenant-primary);
+}
+
+.focus\:border-tenant-secondary:focus {
+  border-color: var(--tenant-secondary);
+}
+
+/* Gradient utilities */
+.bg-gradient-to-r-tenant {
+  background-image: linear-gradient(to right, var(--tenant-primary), var(--tenant-secondary));
+}
+
+.bg-gradient-to-br-tenant {
+  background-image: linear-gradient(to bottom right, var(--tenant-primary), var(--tenant-secondary));
+}
+
+.bg-gradient-to-t-tenant {
+  background-image: linear-gradient(to top, var(--tenant-primary), var(--tenant-secondary));
+}
+
+/* Button variants */
+.btn-tenant-primary {
+  background-color: var(--tenant-primary);
+  color: white;
+  border: 1px solid var(--tenant-primary);
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-tenant-primary:hover {
+  background-color: var(--tenant-primary-700, #1e3a8a);
+  border-color: var(--tenant-primary-700, #1e3a8a);
+}
+
+.btn-tenant-secondary {
+  background-color: var(--tenant-secondary);
+  color: white;
+  border: 1px solid var(--tenant-secondary);
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-tenant-secondary:hover {
+  background-color: var(--tenant-secondary-700, #b91c1c);
+  border-color: var(--tenant-secondary-700, #b91c1c);
+}
+
+.btn-tenant-outline {
+  background-color: transparent;
+  color: var(--tenant-primary);
+  border: 1px solid var(--tenant-primary);
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-tenant-outline:hover {
+  background-color: var(--tenant-primary);
+  color: white;
+}
+
+/* White label mode - hide platform branding */
+.white-label .platform-branding {
+  display: none !important;
+}
+
+.white-label .platform-footer {
+  display: none !important;
+}
+
+/* Loading spinner with tenant colors */
+.spinner-tenant {
+  border: 2px solid var(--tenant-primary-200, rgba(30, 64, 175, 0.2));
+  border-top: 2px solid var(--tenant-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Card with tenant accent */
+.card-tenant-accent {
+  border-left: 4px solid var(--tenant-primary);
+}
+
+.card-tenant-accent-secondary {
+  border-left: 4px solid var(--tenant-secondary);
+}
+
+/* Progress bar with tenant colors */
+.progress-tenant {
+  background-color: var(--tenant-primary-100, rgba(30, 64, 175, 0.1));
+}
+
+.progress-tenant .progress-bar {
+  background-color: var(--tenant-primary);
+}
+
+/* Badge variants */
+.badge-tenant-primary {
+  background-color: var(--tenant-primary-100, rgba(30, 64, 175, 0.1));
+  color: var(--tenant-primary-700, #1e3a8a);
+  border: 1px solid var(--tenant-primary-200, rgba(30, 64, 175, 0.2));
+}
+
+.badge-tenant-secondary {
+  background-color: var(--tenant-secondary-100, rgba(220, 38, 38, 0.1));
+  color: var(--tenant-secondary-700, #b91c1c);
+  border: 1px solid var(--tenant-secondary-200, rgba(220, 38, 38, 0.2));
+}
+
+/* Link styling */
+.link-tenant {
+  color: var(--tenant-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--tenant-primary-200, rgba(30, 64, 175, 0.2));
+  transition: all 0.2s ease-in-out;
+}
+
+.link-tenant:hover {
+  color: var(--tenant-primary-700, #1e3a8a);
+  text-decoration-color: var(--tenant-primary-700, #1e3a8a);
+}
+
+/* Form input focus with tenant colors */
+.input-tenant:focus {
+  outline: none;
+  border-color: var(--tenant-primary);
+  box-shadow: 0 0 0 3px var(--tenant-primary-100, rgba(30, 64, 175, 0.1));
+}
+
+/* Navigation active state */
+.nav-item-active-tenant {
+  background-color: var(--tenant-primary-50, rgba(30, 64, 175, 0.05));
+  color: var(--tenant-primary);
+  border-left: 3px solid var(--tenant-primary);
+}

@@ -1,0 +1,14 @@
+<svg width="120" height="60" viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="120" height="60" rx="4" fill="#E53E3E"/>
+  <rect x="2" y="2" width="116" height="56" rx="2" fill="white"/>
+  
+  <!-- Gas Safe Text -->
+  <text x="60" y="20" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#E53E3E">GAS SAFE</text>
+  <text x="60" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#E53E3E">REGISTERED</text>
+  
+  <!-- Registration number placeholder -->
+  <text x="60" y="48" text-anchor="middle" font-family="Arial, sans-serif" font-size="6" fill="#666">REG: 123456</text>
+  
+  <!-- Simple flame icon -->
+  <path d="M25 25 C25 20, 30 18, 32 22 C34 20, 38 22, 36 26 C38 28, 35 32, 30 30 C28 32, 22 30, 25 25 Z" fill="#E53E3E"/>
+</svg>

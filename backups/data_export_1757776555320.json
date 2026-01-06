@@ -1,0 +1,652 @@
+{
+  "exportedAt": "2025-09-13T15:15:55.255Z",
+  "version": "1.0",
+  "courses": [
+    {
+      "id": "cmfh8jktp0000rr4e7gvp38o0",
+      "title": "ACS CORE & 4 INITIAL (Domestic Gas)",
+      "description": "Initial Assessment for ACS Core Gas Safety and 4 appliances (CCN1, CPA1, CENWAT1, CKR1). Essential certification for domestic gas engineers starting their career.",
+      "category": "GAS_SAFE",
+      "duration": 40,
+      "price": 995,
+      "maxStudents": 8,
+      "createdAt": "2025-09-12T19:33:40.526Z",
+      "updatedAt": "2025-09-12T19:33:40.526Z"
+    },
+    {
+      "id": "cmfh8jkts0001rr4ez2ddhdg9",
+      "title": "ACS CORE & 4 REA (Domestic Gas Re-Assessment)",
+      "description": "5-year re-assessment for ACS Core Gas Safety and 4 appliances. Maintains your Gas Safe registration for domestic work.",
+      "category": "GAS_SAFE",
+      "duration": 8,
+      "price": 650,
+      "maxStudents": 12,
+      "createdAt": "2025-09-12T19:33:40.529Z",
+      "updatedAt": "2025-09-12T19:33:40.529Z"
+    },
+    {
+      "id": "cmfh8jktt0002rr4e8xww7zi8",
+      "title": "ACS CKR1 - Cookers (Initial)",
+      "description": "Initial assessment for installation, commissioning, service and repair of domestic gas cookers and built-in cooking appliances.",
+      "category": "GAS_SAFE",
+      "duration": 8,
+      "price": 295,
+      "maxStudents": 10,
+      "createdAt": "2025-09-12T19:33:40.529Z",
+      "updatedAt": "2025-09-12T19:33:40.529Z"
+    },
+    {
+      "id": "cmfh8jktu0003rr4eozgmjhy4",
+      "title": "ACS HTR1 - Central Heating (Initial)",
+      "description": "Initial assessment for installation, commissioning, service and repair of domestic gas central heating systems up to 70kW.",
+      "category": "GAS_SAFE",
+      "duration": 16,
+      "price": 495,
+      "maxStudents": 8,
+      "createdAt": "2025-09-12T19:33:40.531Z",
+      "updatedAt": "2025-09-12T19:33:40.531Z"
+    },
+    {
+      "id": "cmfh8jktv0004rr4evugc2v0b",
+      "title": "ACS WAT1 - Water Heaters (Initial)",
+      "description": "Initial assessment for installation, commissioning, service and repair of domestic gas water heaters and combination boilers.",
+      "category": "GAS_SAFE",
+      "duration": 8,
+      "price": 295,
+      "maxStudents": 10,
+      "createdAt": "2025-09-12T19:33:40.532Z",
+      "updatedAt": "2025-09-12T19:33:40.532Z"
+    },
+    {
+      "id": "cmfh8jktw0005rr4e52a4idsz",
+      "title": "Air Source Heat Pump Installation (MCS Approved)",
+      "description": "Comprehensive training on air source heat pump installation, commissioning and maintenance. MCS approved course for domestic renewable installations.",
+      "category": "HEAT_PUMP",
+      "duration": 32,
+      "price": 1295,
+      "maxStudents": 6,
+      "createdAt": "2025-09-12T19:33:40.533Z",
+      "updatedAt": "2025-09-12T19:33:40.533Z"
+    },
+    {
+      "id": "cmfh8jktx0006rr4e8vdxndbk",
+      "title": "Ground Source Heat Pump Systems",
+      "description": "Specialist training on ground source heat pump technology, ground loop installation and system design for domestic properties.",
+      "category": "HEAT_PUMP",
+      "duration": 24,
+      "price": 995,
+      "maxStudents": 6,
+      "createdAt": "2025-09-12T19:33:40.533Z",
+      "updatedAt": "2025-09-12T19:33:40.533Z"
+    },
+    {
+      "id": "cmfh8jkty0007rr4e83dqp3eu",
+      "title": "Heat Pump Maintenance & Service",
+      "description": "Service and maintenance procedures for air and ground source heat pumps. Fault finding and repair techniques.",
+      "category": "HEAT_PUMP",
+      "duration": 16,
+      "price": 695,
+      "maxStudents": 8,
+      "createdAt": "2025-09-12T19:33:40.534Z",
+      "updatedAt": "2025-09-12T19:33:40.534Z"
+    },
+    {
+      "id": "cmfh8jktz0008rr4eb8sagfs2",
+      "title": "OFTEC OT1 - Oil Tank Installation",
+      "description": "Installation of oil storage tanks and supply systems for domestic heating. Includes regulations and safety procedures.",
+      "category": "OFTEC",
+      "duration": 16,
+      "price": 595,
+      "maxStudents": 8,
+      "createdAt": "2025-09-12T19:33:40.535Z",
+      "updatedAt": "2025-09-12T19:33:40.535Z"
+    },
+    {
+      "id": "cmfh8jku00009rr4ela5yuw7n",
+      "title": "OFTEC OT2 - Oil Boiler Commissioning",
+      "description": "Commissioning, servicing and maintenance of oil-fired boilers and heating systems for domestic properties.",
+      "category": "OFTEC",
+      "duration": 24,
+      "price": 795,
+      "maxStudents": 6,
+      "createdAt": "2025-09-12T19:33:40.536Z",
+      "updatedAt": "2025-09-12T19:33:40.536Z"
+    },
+    {
+      "id": "cmfh8jku0000arr4emvfuv6eq",
+      "title": "ACS LPG Core Safety (CPLPG1)",
+      "description": "Core LPG safety course covering properties of LPG, installation principles, safety procedures and emergency actions.",
+      "category": "LPG",
+      "duration": 8,
+      "price": 395,
+      "maxStudents": 12,
+      "createdAt": "2025-09-12T19:33:40.537Z",
+      "updatedAt": "2025-09-12T19:33:40.537Z"
+    },
+    {
+      "id": "cmfh8jku1000brr4eaitwxho1",
+      "title": "ACS CCLP1 - LPG Pipework",
+      "description": "Installation of LPG pipework systems for domestic and leisure applications. Covers regulations and testing procedures.",
+      "category": "LPG",
+      "duration": 16,
+      "price": 595,
+      "maxStudents": 8,
+      "createdAt": "2025-09-12T19:33:40.538Z",
+      "updatedAt": "2025-09-12T19:33:40.538Z"
+    },
+    {
+      "id": "cmfh8jku2000crr4edbczqogs",
+      "title": "F-Gas Category I Certification",
+      "description": "Category I F-Gas certification for handling refrigerants in air conditioning and heat pump systems. EU regulation compliance.",
+      "category": "FGAS_AIR_CONDITIONING",
+      "duration": 16,
+      "price": 695,
+      "maxStudents": 10,
+      "createdAt": "2025-09-12T19:33:40.539Z",
+      "updatedAt": "2025-09-12T19:33:40.539Z"
+    },
+    {
+      "id": "cmfh8jku3000drr4euqvqc3z3",
+      "title": "F-Gas Category II Certification",
+      "description": "Category II F-Gas certification for installation and commissioning of air conditioning systems. Higher level certification.",
+      "category": "FGAS_AIR_CONDITIONING",
+      "duration": 24,
+      "price": 895,
+      "maxStudents": 8,
+      "createdAt": "2025-09-12T19:33:40.540Z",
+      "updatedAt": "2025-09-12T19:33:40.540Z"
+    },
+    {
+      "id": "cmfh8jku4000err4eab8z92hc",
+      "title": "ACS CIGA1 - Industrial & Commercial Boilers",
+      "description": "Installation, commissioning and maintenance of industrial and commercial gas-fired boilers over 70kW net input.",
+      "category": "COMMERCIAL_GAS",
+      "duration": 24,
+      "price": 895,
+      "maxStudents": 6,
+      "createdAt": "2025-09-12T19:33:40.540Z",
+      "updatedAt": "2025-09-12T19:33:40.540Z"
+    },
+    {
+      "id": "cmfh8jku5000frr4eeq76kzp7",
+      "title": "ACS CDGA1 - Commercial Catering Equipment",
+      "description": "Installation, commissioning, service and repair of commercial gas catering appliances in commercial kitchens.",
+      "category": "COMMERCIAL_CATERING",
+      "duration": 16,
+      "price": 695,
+      "maxStudents": 8,
+      "createdAt": "2025-09-12T19:33:40.541Z",
+      "updatedAt": "2025-09-12T19:33:40.541Z"
+    },
+    {
+      "id": "cmfh8jku6000grr4e78ncno4k",
+      "title": "Water Regulations (WRAS) Training",
+      "description": "Understanding water regulations, backflow prevention, and compliance requirements for plumbing installations.",
+      "category": "WATER",
+      "duration": 8,
+      "price": 295,
+      "maxStudents": 12,
+      "createdAt": "2025-09-12T19:33:40.542Z",
+      "updatedAt": "2025-09-12T19:33:40.542Z"
+    },
+    {
+      "id": "cmfh8jku7000hrr4exm3r5s6s",
+      "title": "18th Edition IET Wiring Regulations (BS 7671)",
+      "description": "Latest 18th Edition wiring regulations training covering amendments and updates to electrical installation standards.",
+      "category": "ELECTRICAL",
+      "duration": 16,
+      "price": 495,
+      "maxStudents": 10,
+      "createdAt": "2025-09-12T19:33:40.543Z",
+      "updatedAt": "2025-09-12T19:33:40.543Z"
+    },
+    {
+      "id": "cmfh8jku7000irr4er823gdto",
+      "title": "PAT Testing (Portable Appliance Testing)",
+      "description": "Training on portable appliance testing procedures, equipment use, and certification requirements for electrical safety.",
+      "category": "ELECTRICAL",
+      "duration": 8,
+      "price": 295,
+      "maxStudents": 12,
+      "createdAt": "2025-09-12T19:33:40.544Z",
+      "updatedAt": "2025-09-12T19:33:40.544Z"
+    }
+  ],
+  "courseSessions": [
+    {
+      "id": "cmfh8lvgi0002rremhlfu6yzk",
+      "courseId": "cmfh8jktp0000rr4e7gvp38o0",
+      "startDate": "2025-10-01T00:00:00.000Z",
+      "endDate": "2025-10-05T00:00:00.000Z",
+      "startTime": "09:00",
+      "endTime": "17:00",
+      "availableSpots": 8,
+      "bookedSpots": 0,
+      "isActive": true,
+      "isCompleted": false,
+      "completedAt": null,
+      "instructorNotes": null,
+      "createdAt": "2025-09-12T19:35:27.617Z",
+      "updatedAt": "2025-09-12T19:35:27.617Z"
+    },
+    {
+      "id": "cmfh976np0005rr77xd4swhy2",
+      "courseId": "cmfh8jktp0000rr4e7gvp38o0",
+      "startDate": "2025-09-11T19:52:01.908Z",
+      "endDate": "2025-09-12T19:52:01.909Z",
+      "startTime": "09:00",
+      "endTime": "17:00",
+      "availableSpots": 8,
+      "bookedSpots": 4,
+      "isActive": true,
+      "isCompleted": true,
+      "completedAt": "2025-09-12T20:08:38.961Z",
+      "instructorNotes": "Group of trainee students from Bobs Plumbing & Heating.",
+      "createdAt": "2025-09-12T19:52:01.910Z",
+      "updatedAt": "2025-09-12T20:08:38.962Z"
+    }
+  ],
+  "customers": [
+    {
+      "id": "cmfh976nk0000rr77s9y9f84b",
+      "firstName": "John",
+      "lastName": "Smith",
+      "email": "john.smith@example.com",
+      "phone": null,
+      "company": "Smith Heating Ltd",
+      "address": null,
+      "city": null,
+      "postcode": null,
+      "createdAt": "2025-09-12T19:52:01.904Z",
+      "updatedAt": "2025-09-12T19:52:01.904Z"
+    },
+    {
+      "id": "cmfh976nl0001rr77tbxa1jdx",
+      "firstName": "Sarah",
+      "lastName": "Johnson",
+      "email": "sarah.johnson@example.com",
+      "phone": null,
+      "company": "Johnson Gas Services",
+      "address": null,
+      "city": null,
+      "postcode": null,
+      "createdAt": "2025-09-12T19:52:01.906Z",
+      "updatedAt": "2025-09-12T19:52:01.906Z"
+    },
+    {
+      "id": "cmfh976nm0002rr779v9oba1f",
+      "firstName": "Michael",
+      "lastName": "Brown",
+      "email": "mike.brown@example.com",
+      "phone": null,
+      "company": "Brown Plumbing",
+      "address": null,
+      "city": null,
+      "postcode": null,
+      "createdAt": "2025-09-12T19:52:01.907Z",
+      "updatedAt": "2025-09-12T19:52:01.907Z"
+    },
+    {
+      "id": "cmfh976no0003rr77sfhm4wln",
+      "firstName": "Emma",
+      "lastName": "Wilson",
+      "email": "emma.wilson@example.com",
+      "phone": null,
+      "company": "Wilson Gas Engineers",
+      "address": "10 Harvey street",
+      "city": "Bristol",
+      "postcode": null,
+      "createdAt": "2025-09-12T19:52:01.908Z",
+      "updatedAt": "2025-09-12T19:55:33.199Z"
+    }
+  ],
+  "bookings": [
+    {
+      "id": "cmfh976nq0007rr77r2sde2qt",
+      "customerId": "cmfh976nk0000rr77s9y9f84b",
+      "sessionId": "cmfh976np0005rr77xd4swhy2",
+      "status": "CONFIRMED",
+      "specialRequests": null,
+      "totalAmount": 995,
+      "depositAmount": 298.5,
+      "createdAt": "2025-09-12T19:52:01.911Z",
+      "updatedAt": "2025-09-12T19:52:01.911Z",
+      "payments": []
+    },
+    {
+      "id": "cmfh976nr0009rr774kn6259p",
+      "customerId": "cmfh976nl0001rr77tbxa1jdx",
+      "sessionId": "cmfh976np0005rr77xd4swhy2",
+      "status": "CONFIRMED",
+      "specialRequests": null,
+      "totalAmount": 995,
+      "depositAmount": 298.5,
+      "createdAt": "2025-09-12T19:52:01.911Z",
+      "updatedAt": "2025-09-12T19:52:01.911Z",
+      "payments": []
+    },
+    {
+      "id": "cmfh976nr000brr77gz3jw2ms",
+      "customerId": "cmfh976nm0002rr779v9oba1f",
+      "sessionId": "cmfh976np0005rr77xd4swhy2",
+      "status": "CONFIRMED",
+      "specialRequests": null,
+      "totalAmount": 995,
+      "depositAmount": 298.5,
+      "createdAt": "2025-09-12T19:52:01.912Z",
+      "updatedAt": "2025-09-12T19:52:01.912Z",
+      "payments": []
+    },
+    {
+      "id": "cmfh976ns000drr77x7njpm6g",
+      "customerId": "cmfh976no0003rr77sfhm4wln",
+      "sessionId": "cmfh976np0005rr77xd4swhy2",
+      "status": "CONFIRMED",
+      "specialRequests": null,
+      "totalAmount": 995,
+      "depositAmount": 298.5,
+      "createdAt": "2025-09-12T19:52:01.912Z",
+      "updatedAt": "2025-09-12T19:52:01.912Z",
+      "payments": []
+    }
+  ],
+  "achievements": [
+    {
+      "id": "cmfh9sjzs0009rrk9jsumvr6a",
+      "customerId": "cmfh976nk0000rr77s9y9f84b",
+      "courseId": "cmfh8jktp0000rr4e7gvp38o0",
+      "sessionId": "cmfh976np0005rr77xd4swhy2",
+      "achievedAt": "2025-09-12T20:08:38.968Z",
+      "level": "BRONZE",
+      "category": "GAS_SAFE",
+      "certificationDate": "2025-09-12T20:08:38.966Z",
+      "expiryDate": "2030-09-12T20:08:38.966Z",
+      "isExpired": false,
+      "remindersSent": 2,
+      "nextReminderDate": "2025-10-12T20:11:30.687Z",
+      "certificateNumber": "GAS_SAFE-1757707718966-f84b",
+      "createdAt": "2025-09-12T20:08:38.968Z",
+      "updatedAt": "2025-09-12T20:11:30.688Z"
+    }
+  ],
+  "sessionAttendance": [
+    {
+      "id": "cmfh9sjzp0001rrk9jpcvnoem",
+      "sessionId": "cmfh976np0005rr77xd4swhy2",
+      "customerId": "cmfh976nk0000rr77s9y9f84b",
+      "status": "ATTENDED",
+      "attendedDays": 3,
+      "totalDays": 3,
+      "passed": true,
+      "grade": "A",
+      "notes": "Passed with good knowlege of core.",
+      "certificateIssued": true,
+      "createdAt": "2025-09-12T20:08:38.965Z",
+      "updatedAt": "2025-09-12T20:08:38.965Z"
+    },
+    {
+      "id": "cmfh9sjzq0003rrk9k1ka0dzy",
+      "sessionId": "cmfh976np0005rr77xd4swhy2",
+      "customerId": "cmfh976nl0001rr77tbxa1jdx",
+      "status": "REGISTERED",
+      "attendedDays": 0,
+      "totalDays": 3,
+      "passed": false,
+      "grade": "",
+      "notes": "",
+      "certificateIssued": false,
+      "createdAt": "2025-09-12T20:08:38.967Z",
+      "updatedAt": "2025-09-12T20:08:38.967Z"
+    },
+    {
+      "id": "cmfh9sjzr0005rrk9ke4hx1ez",
+      "sessionId": "cmfh976np0005rr77xd4swhy2",
+      "customerId": "cmfh976nm0002rr779v9oba1f",
+      "status": "REGISTERED",
+      "attendedDays": 0,
+      "totalDays": 3,
+      "passed": false,
+      "grade": "",
+      "notes": "",
+      "certificateIssued": false,
+      "createdAt": "2025-09-12T20:08:38.967Z",
+      "updatedAt": "2025-09-12T20:08:38.967Z"
+    },
+    {
+      "id": "cmfh9sjzs0007rrk9fonc6uxq",
+      "sessionId": "cmfh976np0005rr77xd4swhy2",
+      "customerId": "cmfh976no0003rr77sfhm4wln",
+      "status": "REGISTERED",
+      "attendedDays": 0,
+      "totalDays": 3,
+      "passed": false,
+      "grade": "",
+      "notes": "",
+      "certificateIssued": false,
+      "createdAt": "2025-09-12T20:08:38.968Z",
+      "updatedAt": "2025-09-12T20:08:38.968Z"
+    }
+  ],
+  "adminUsers": [
+    {
+      "id": "cmfh0hbtq0000rr49ma2f55y0",
+      "email": "admin@acme-training.co.uk",
+      "passwordHash": "$2b$12$Ww1vHplAEHD0l8fhUItQ7e5YOzCavwGzS/.YP1p5YONTb4w0dpB6C",
+      "firstName": "Admin",
+      "lastName": "User",
+      "role": "SUPER_ADMIN",
+      "isActive": true,
+      "lastLoginAt": "2025-09-12T15:49:59.242Z",
+      "createdAt": "2025-09-12T15:47:58.622Z",
+      "updatedAt": "2025-09-12T15:49:59.243Z"
+    }
+  ],
+  "systemSettings": [
+    {
+      "id": "main",
+      "companyName": "ACME Training Centre",
+      "companyAddress": null,
+      "companyPhone": null,
+      "companyEmail": null,
+      "companyWebsite": null,
+      "defaultMaxStudents": 12,
+      "defaultSessionLength": 8,
+      "bookingWindowDays": 30,
+      "cancellationHours": 24,
+      "depositPercentage": 0.3,
+      "emailNotificationsEnabled": true,
+      "smtpHost": null,
+      "smtpPort": 587,
+      "smtpUser": null,
+      "smtpPassword": null,
+      "smtpSecure": true,
+      "createdAt": "2025-09-12T19:57:16.987Z",
+      "updatedAt": "2025-09-12T19:57:16.987Z"
+    }
+  ],
+  "certificationRules": [
+    {
+      "id": "cmfh0hbv60000rr4k7n0nr99f",
+      "category": "GAS_SAFE",
+      "validityYears": 5,
+      "reminderMonths": "6,3,1",
+      "isActive": true,
+      "createdAt": "2025-09-12T15:47:58.674Z",
+      "updatedAt": "2025-09-12T15:47:58.674Z"
+    },
+    {
+      "id": "cmfh0hbv70001rr4kv3vezln9",
+      "category": "HEAT_PUMP",
+      "validityYears": 5,
+      "reminderMonths": "6,3,1",
+      "isActive": true,
+      "createdAt": "2025-09-12T15:47:58.676Z",
+      "updatedAt": "2025-09-12T15:47:58.676Z"
+    },
+    {
+      "id": "cmfh0hbv80002rr4kuo5iz1m2",
+      "category": "OFTEC",
+      "validityYears": 5,
+      "reminderMonths": "6,3,1",
+      "isActive": true,
+      "createdAt": "2025-09-12T15:47:58.677Z",
+      "updatedAt": "2025-09-12T15:47:58.677Z"
+    },
+    {
+      "id": "cmfh0hbv90003rr4kb2k0clwb",
+      "category": "LPG",
+      "validityYears": 5,
+      "reminderMonths": "6,3,1",
+      "isActive": true,
+      "createdAt": "2025-09-12T15:47:58.678Z",
+      "updatedAt": "2025-09-12T15:47:58.678Z"
+    },
+    {
+      "id": "cmfh0hbvb0004rr4kozg00aw5",
+      "category": "VAPORIZING",
+      "validityYears": 3,
+      "reminderMonths": "6,3,1",
+      "isActive": true,
+      "createdAt": "2025-09-12T15:47:58.679Z",
+      "updatedAt": "2025-09-12T15:47:58.679Z"
+    },
+    {
+      "id": "cmfh0hbvc0005rr4kjgadvhun",
+      "category": "WATER",
+      "validityYears": 5,
+      "reminderMonths": "6,3,1",
+      "isActive": true,
+      "createdAt": "2025-09-12T15:47:58.680Z",
+      "updatedAt": "2025-09-12T15:47:58.680Z"
+    },
+    {
+      "id": "cmfh0hbvd0006rr4krdh9kofj",
+      "category": "FGAS_AIR_CONDITIONING",
+      "validityYears": 5,
+      "reminderMonths": "6,3,1",
+      "isActive": true,
+      "createdAt": "2025-09-12T15:47:58.681Z",
+      "updatedAt": "2025-09-12T15:47:58.681Z"
+    },
+    {
+      "id": "cmfh0hbve0007rr4kfrx814yj",
+      "category": "COMMERCIAL_CATERING",
+      "validityYears": 5,
+      "reminderMonths": "6,3,1",
+      "isActive": true,
+      "createdAt": "2025-09-12T15:47:58.682Z",
+      "updatedAt": "2025-09-12T15:47:58.682Z"
+    },
+    {
+      "id": "cmfh0hbvf0008rr4kbom5vpdj",
+      "category": "COMMERCIAL_LAUNDRY",
+      "validityYears": 5,
+      "reminderMonths": "6,3,1",
+      "isActive": true,
+      "createdAt": "2025-09-12T15:47:58.683Z",
+      "updatedAt": "2025-09-12T15:47:58.683Z"
+    },
+    {
+      "id": "cmfh0hbvg0009rr4ks7blqfgf",
+      "category": "COMMERCIAL_GAS",
+      "validityYears": 5,
+      "reminderMonths": "6,3,1",
+      "isActive": true,
+      "createdAt": "2025-09-12T15:47:58.684Z",
+      "updatedAt": "2025-09-12T15:47:58.684Z"
+    },
+    {
+      "id": "cmfh0hbvh000arr4ke6oweyn8",
+      "category": "COMMERCIAL_CORE",
+      "validityYears": 5,
+      "reminderMonths": "6,3,1",
+      "isActive": true,
+      "createdAt": "2025-09-12T15:47:58.685Z",
+      "updatedAt": "2025-09-12T15:47:58.685Z"
+    },
+    {
+      "id": "cmfh0hbvi000brr4k5wbzmh5u",
+      "category": "ELECTRICAL",
+      "validityYears": 3,
+      "reminderMonths": "6,3,1",
+      "isActive": true,
+      "createdAt": "2025-09-12T15:47:58.686Z",
+      "updatedAt": "2025-09-12T15:47:58.686Z"
+    },
+    {
+      "id": "cmfh0hbvi000crr4keia1ss1x",
+      "category": "REFRIGERATION",
+      "validityYears": 5,
+      "reminderMonths": "6,3,1",
+      "isActive": true,
+      "createdAt": "2025-09-12T15:47:58.687Z",
+      "updatedAt": "2025-09-12T15:47:58.687Z"
+    }
+  ],
+  "certificationReminders": [
+    {
+      "id": "cmfh9w8gd000brrk9rvu1bic5",
+      "achievementId": "cmfh9sjzs0009rrk9jsumvr6a",
+      "reminderType": "CUSTOM",
+      "scheduledFor": "2025-09-12T20:11:30.632Z",
+      "sentAt": "2025-09-12T20:11:30.632Z",
+      "emailSent": true,
+      "smsSent": false,
+      "emailSubject": "Certification Renewal Reminder - ACS CORE & 4 INITIAL (Domestic Gas)",
+      "emailContent": "Manual reminder sent by admin",
+      "createdAt": "2025-09-12T20:11:30.638Z",
+      "updatedAt": "2025-09-12T20:11:30.638Z"
+    },
+    {
+      "id": "cmfh9w8ht000drrk9ln1imjfm",
+      "achievementId": "cmfh9sjzs0009rrk9jsumvr6a",
+      "reminderType": "CUSTOM",
+      "scheduledFor": "2025-09-12T20:11:30.687Z",
+      "sentAt": "2025-09-12T20:11:30.687Z",
+      "emailSent": true,
+      "smsSent": false,
+      "emailSubject": "Certification Renewal Reminder - ACS CORE & 4 INITIAL (Domestic Gas)",
+      "emailContent": "Manual reminder sent by admin",
+      "createdAt": "2025-09-12T20:11:30.689Z",
+      "updatedAt": "2025-09-12T20:11:30.689Z"
+    }
+  ],
+  "emailTemplates": [
+    {
+      "id": "cmfh0ip7q0000rrgw8dq8i6vs",
+      "name": "Gas Safe - 1 Month Renewal Reminder",
+      "category": "GAS_SAFE",
+      "reminderType": "ONE_MONTH",
+      "subject": "URGENT: Your Gas Safe certification expires in 1 month - {{courseTitle}}",
+      "htmlContent": "<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Gas Safe Certification Renewal Reminder</title>\n  <style>\n    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }\n    .container { max-width: 600px; margin: 0 auto; padding: 20px; }\n    .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }\n    .content { background: #ffffff; padding: 30px; border: 1px solid #e5e7eb; }\n    .footer { background: #f9fafb; padding: 20px; text-align: center; border-radius: 0 0 8px 8px; border: 1px solid #e5e7eb; border-top: none; }\n    .urgency-badge { display: inline-block; padding: 8px 16px; border-radius: 20px; font-weight: bold; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 20px; background-color: #dc2626; color: white; }\n    .cert-details { background: #f8fafc; padding: 20px; border-radius: 6px; margin: 20px 0; }\n    .cert-details h3 { margin: 0 0 10px 0; color: #1f2937; }\n    .cert-details p { margin: 5px 0; }\n    .cta-button { display: inline-block; background: #3b82f6; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; margin: 20px 0; }\n    .warning { background: #fef3c7; border: 1px solid #f59e0b; padding: 15px; border-radius: 6px; margin: 15px 0; }\n    .contact-info { background: #f0f9ff; padding: 15px; border-radius: 6px; margin: 15px 0; }\n  </style>\n</head>\n<body>\n  <div class=\"container\">\n    <div class=\"header\">\n      <h1>ACME Training Centre</h1>\n      <p>Gas Safe Certification Renewal Notice</p>\n    </div>\n    \n    <div class=\"content\">\n      <div class=\"urgency-badge\">URGENT - EXPIRES SOON</div>\n      \n      <h2>Dear {{customerName}},</h2>\n      \n      <p><strong>Your Gas Safe certification expires in 1 month.</strong> This is a critical reminder to ensure you maintain your professional qualifications.</p>\n      \n      <div class=\"cert-details\">\n        <h3>Certification Details</h3>\n        <p><strong>Course:</strong> {{courseTitle}}</p>\n        <p><strong>Category:</strong> Gas Safe</p>\n        <p><strong>Original Certification Date:</strong> {{certificationDate}}</p>\n        <p><strong>Expiry Date:</strong> {{expiryDate}}</p>\n        {{#if certificateNumber}}<p><strong>Certificate Number:</strong> {{certificateNumber}}</p>{{/if}}\n      </div>\n      \n      <div class=\"warning\">\n        <strong>Action Required:</strong> Book your Gas Safe renewal course now to avoid any disruption to your work and maintain legal compliance.\n      </div>\n      \n      <p><strong>Why renew your Gas Safe certification?</strong></p>\n      <ul>\n        <li>Legal requirement to work on gas appliances</li>\n        <li>Insurance coverage validity</li>\n        <li>Continued access to work opportunities</li>\n        <li>Up-to-date safety knowledge and regulations</li>\n      </ul>\n      \n      <div style=\"text-align: center;\">\n        <a href=\"tel:01234567890\" class=\"cta-button\">Call Now: 01234 567890</a>\n      </div>\n      \n      <div class=\"contact-info\">\n        <h3>Book Your Gas Safe Renewal Course</h3>\n        <p><strong>Phone:</strong> 01234 567890</p>\n        <p><strong>Email:</strong> bookings@acmetraining.co.uk</p>\n        <p><strong>Website:</strong> www.acmetraining.co.uk</p>\n        <p><strong>Office Hours:</strong> Monday - Friday, 8:00 AM - 6:00 PM</p>\n      </div>\n      \n      <p>If you have already renewed your certification, please contact us to update our records.</p>\n      \n      <p>Best regards,<br>\n      <strong>The ACME Training Team</strong></p>\n    </div>\n    \n    <div class=\"footer\">\n      <p><small>\n        ACME Training Centre | Registered Gas Safe Training Provider<br>\n        This is an automated reminder. For inquiries, contact us at info@acmetraining.co.uk\n      </small></p>\n    </div>\n  </div>\n</body>\n</html>",
+      "textContent": "ACME Training Centre - Gas Safe Certification Renewal Notice\nURGENT - EXPIRES SOON\n\nDear {{customerName}},\n\nYour Gas Safe certification expires in 1 month. This is a critical reminder to ensure you maintain your professional qualifications.\n\nCertification Details:\n- Course: {{courseTitle}}\n- Category: Gas Safe\n- Original Certification Date: {{certificationDate}}\n- Expiry Date: {{expiryDate}}\n{{#if certificateNumber}}- Certificate Number: {{certificateNumber}}{{/if}}\n\nAction Required: Book your Gas Safe renewal course now to avoid any disruption to your work and maintain legal compliance.\n\nWhy renew your Gas Safe certification?\n• Legal requirement to work on gas appliances\n• Insurance coverage validity\n• Continued access to work opportunities\n• Up-to-date safety knowledge and regulations\n\nBook Your Gas Safe Renewal Course:\nPhone: 01234 567890\nEmail: bookings@acmetraining.co.uk\nWebsite: www.acmetraining.co.uk\nOffice Hours: Monday - Friday, 8:00 AM - 6:00 PM\n\nIf you have already renewed your certification, please contact us to update our records.\n\nBest regards,\nThe ACME Training Team\n\n---\nACME Training Centre | Registered Gas Safe Training Provider\nThis is an automated reminder. For inquiries, contact us at info@acmetraining.co.uk",
+      "isActive": true,
+      "createdAt": "2025-09-12T15:49:02.630Z",
+      "updatedAt": "2025-09-12T15:49:02.630Z"
+    },
+    {
+      "id": "cmfh0ip7s0001rrgwu9ml0sjb",
+      "name": "General - 3 Month Renewal Reminder",
+      "category": null,
+      "reminderType": "THREE_MONTHS",
+      "subject": "Certification Renewal Reminder - {{courseTitle}} expires in 3 months",
+      "htmlContent": "<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Certification Renewal Reminder</title>\n  <style>\n    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }\n    .container { max-width: 600px; margin: 0 auto; padding: 20px; }\n    .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }\n    .content { background: #ffffff; padding: 30px; border: 1px solid #e5e7eb; }\n    .footer { background: #f9fafb; padding: 20px; text-align: center; border-radius: 0 0 8px 8px; border: 1px solid #e5e7eb; border-top: none; }\n    .cert-details { background: #f8fafc; padding: 20px; border-radius: 6px; margin: 20px 0; }\n    .cert-details h3 { margin: 0 0 10px 0; color: #1f2937; }\n    .cert-details p { margin: 5px 0; }\n    .cta-button { display: inline-block; background: #3b82f6; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; margin: 20px 0; }\n    .info-box { background: #f0f9ff; padding: 15px; border-radius: 6px; margin: 15px 0; }\n  </style>\n</head>\n<body>\n  <div class=\"container\">\n    <div class=\"header\">\n      <h1>ACME Training Centre</h1>\n      <p>Certification Renewal Notice</p>\n    </div>\n    \n    <div class=\"content\">\n      <h2>Dear {{customerName}},</h2>\n      \n      <p>This is a friendly reminder that your professional certification will expire in approximately 3 months.</p>\n      \n      <div class=\"cert-details\">\n        <h3>Certification Details</h3>\n        <p><strong>Course:</strong> {{courseTitle}}</p>\n        <p><strong>Category:</strong> {{courseCategory}}</p>\n        <p><strong>Original Certification Date:</strong> {{certificationDate}}</p>\n        <p><strong>Expiry Date:</strong> {{expiryDate}}</p>\n        {{#if certificateNumber}}<p><strong>Certificate Number:</strong> {{certificateNumber}}</p>{{/if}}\n      </div>\n      \n      <p>We recommend booking your renewal course soon to secure your preferred date and avoid any last-minute scheduling issues.</p>\n      \n      <div style=\"text-align: center;\">\n        <a href=\"tel:01234567890\" class=\"cta-button\">Call Us: 01234 567890</a>\n      </div>\n      \n      <div class=\"info-box\">\n        <h3>Contact Information</h3>\n        <p><strong>Phone:</strong> 01234 567890</p>\n        <p><strong>Email:</strong> bookings@acmetraining.co.uk</p>\n        <p><strong>Website:</strong> www.acmetraining.co.uk</p>\n        <p><strong>Office Hours:</strong> Monday - Friday, 8:00 AM - 6:00 PM</p>\n      </div>\n      \n      <p>Thank you for choosing ACME Training Centre for your professional development needs.</p>\n      \n      <p>Best regards,<br>\n      <strong>The ACME Training Team</strong></p>\n    </div>\n    \n    <div class=\"footer\">\n      <p><small>\n        ACME Training Centre | Registered Training Provider<br>\n        This is an automated reminder. For inquiries, contact us at info@acmetraining.co.uk\n      </small></p>\n    </div>\n  </div>\n</body>\n</html>",
+      "textContent": "ACME Training Centre - Certification Renewal Notice\n\nDear {{customerName}},\n\nThis is a friendly reminder that your professional certification will expire in approximately 3 months.\n\nCertification Details:\n- Course: {{courseTitle}}\n- Category: {{courseCategory}}\n- Original Certification Date: {{certificationDate}}\n- Expiry Date: {{expiryDate}}\n{{#if certificateNumber}}- Certificate Number: {{certificateNumber}}{{/if}}\n\nWe recommend booking your renewal course soon to secure your preferred date and avoid any last-minute scheduling issues.\n\nContact Information:\nPhone: 01234 567890\nEmail: bookings@acmetraining.co.uk\nWebsite: www.acmetraining.co.uk\nOffice Hours: Monday - Friday, 8:00 AM - 6:00 PM\n\nThank you for choosing ACME Training Centre for your professional development needs.\n\nBest regards,\nThe ACME Training Team\n\n---\nACME Training Centre | Registered Training Provider\nThis is an automated reminder. For inquiries, contact us at info@acmetraining.co.uk",
+      "isActive": true,
+      "createdAt": "2025-09-12T15:49:02.633Z",
+      "updatedAt": "2025-09-12T15:49:02.633Z"
+    },
+    {
+      "id": "cmfh0ip7t0002rrgwp8ctgz2j",
+      "name": "Expired Certification Notice",
+      "category": null,
+      "reminderType": "EXPIRED",
+      "subject": "URGENT: Your {{courseTitle}} certification has expired",
+      "htmlContent": "<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Expired Certification Notice</title>\n  <style>\n    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }\n    .container { max-width: 600px; margin: 0 auto; padding: 20px; }\n    .header { background: #dc2626; color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }\n    .content { background: #ffffff; padding: 30px; border: 1px solid #e5e7eb; }\n    .footer { background: #f9fafb; padding: 20px; text-align: center; border-radius: 0 0 8px 8px; border: 1px solid #e5e7eb; border-top: none; }\n    .expired-badge { display: inline-block; padding: 8px 16px; border-radius: 20px; font-weight: bold; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 20px; background-color: #dc2626; color: white; }\n    .cert-details { background: #fef2f2; padding: 20px; border-radius: 6px; margin: 20px 0; border: 1px solid #f87171; }\n    .cert-details h3 { margin: 0 0 10px 0; color: #991b1b; }\n    .cert-details p { margin: 5px 0; }\n    .cta-button { display: inline-block; background: #dc2626; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; margin: 20px 0; }\n    .urgent-warning { background: #fef2f2; border: 2px solid #dc2626; padding: 20px; border-radius: 6px; margin: 15px 0; }\n    .contact-info { background: #f0f9ff; padding: 15px; border-radius: 6px; margin: 15px 0; }\n  </style>\n</head>\n<body>\n  <div class=\"container\">\n    <div class=\"header\">\n      <h1>ACME Training Centre</h1>\n      <p>URGENT: Certification Expired</p>\n    </div>\n    \n    <div class=\"content\">\n      <div class=\"expired-badge\">CERTIFICATION EXPIRED</div>\n      \n      <h2>Dear {{customerName}},</h2>\n      \n      <p><strong>Your professional certification has expired.</strong> Immediate action is required to maintain your qualifications and legal compliance.</p>\n      \n      <div class=\"cert-details\">\n        <h3>Expired Certification Details</h3>\n        <p><strong>Course:</strong> {{courseTitle}}</p>\n        <p><strong>Category:</strong> {{courseCategory}}</p>\n        <p><strong>Original Certification Date:</strong> {{certificationDate}}</p>\n        <p><strong>Expired On:</strong> {{expiryDate}}</p>\n        {{#if certificateNumber}}<p><strong>Certificate Number:</strong> {{certificateNumber}}</p>{{/if}}\n      </div>\n      \n      <div class=\"urgent-warning\">\n        <h3>⚠️ IMMEDIATE ACTION REQUIRED</h3>\n        <p><strong>Your certification has expired. You may no longer legally perform work requiring this certification until renewed.</strong></p>\n        <ul>\n          <li>Stop all work requiring this certification immediately</li>\n          <li>Book a renewal course as soon as possible</li>\n          <li>Inform relevant parties (employers, insurance, etc.) of expired status</li>\n        </ul>\n      </div>\n      \n      <p><strong>Consequences of working with expired certification:</strong></p>\n      <ul>\n        <li>Legal liability and potential prosecution</li>\n        <li>Insurance coverage may be void</li>\n        <li>Professional reputation damage</li>\n        <li>Loss of work opportunities</li>\n      </ul>\n      \n      <div style=\"text-align: center;\">\n        <a href=\"tel:01234567890\" class=\"cta-button\">CALL URGENTLY: 01234 567890</a>\n      </div>\n      \n      <div class=\"contact-info\">\n        <h3>Renew Your Certification Immediately</h3>\n        <p><strong>Emergency Booking Line:</strong> 01234 567890</p>\n        <p><strong>Email:</strong> urgent@acmetraining.co.uk</p>\n        <p><strong>Website:</strong> www.acmetraining.co.uk</p>\n        <p><strong>Office Hours:</strong> Monday - Friday, 8:00 AM - 6:00 PM</p>\n      </div>\n      \n      <p>We are here to help you get back on track quickly. Contact us immediately to discuss emergency renewal options.</p>\n      \n      <p>Urgent regards,<br>\n      <strong>The ACME Training Team</strong></p>\n    </div>\n    \n    <div class=\"footer\">\n      <p><small>\n        ACME Training Centre | Registered Training Provider<br>\n        This is an automated notice. For urgent assistance, call 01234 567890\n      </small></p>\n    </div>\n  </div>\n</body>\n</html>",
+      "textContent": "ACME Training Centre - URGENT: Certification Expired\nCERTIFICATION EXPIRED\n\nDear {{customerName}},\n\nYour professional certification has expired. Immediate action is required to maintain your qualifications and legal compliance.\n\nExpired Certification Details:\n- Course: {{courseTitle}}\n- Category: {{courseCategory}}\n- Original Certification Date: {{certificationDate}}\n- Expired On: {{expiryDate}}\n{{#if certificateNumber}}- Certificate Number: {{certificateNumber}}{{/if}}\n\n⚠️ IMMEDIATE ACTION REQUIRED\nYour certification has expired. You may no longer legally perform work requiring this certification until renewed.\n\n• Stop all work requiring this certification immediately\n• Book a renewal course as soon as possible  \n• Inform relevant parties (employers, insurance, etc.) of expired status\n\nConsequences of working with expired certification:\n• Legal liability and potential prosecution\n• Insurance coverage may be void\n• Professional reputation damage\n• Loss of work opportunities\n\nRenew Your Certification Immediately:\nEmergency Booking Line: 01234 567890\nEmail: urgent@acmetraining.co.uk\nWebsite: www.acmetraining.co.uk\nOffice Hours: Monday - Friday, 8:00 AM - 6:00 PM\n\nWe are here to help you get back on track quickly. Contact us immediately to discuss emergency renewal options.\n\nUrgent regards,\nThe ACME Training Team\n\n---\nACME Training Centre | Registered Training Provider\nThis is an automated notice. For urgent assistance, call 01234 567890",
+      "isActive": true,
+      "createdAt": "2025-09-12T15:49:02.634Z",
+      "updatedAt": "2025-09-12T15:49:02.634Z"
+    }
+  ]
+}
