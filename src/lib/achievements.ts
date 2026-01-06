@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/prisma'
-import { CourseCategory, AchievementLevel } from '@/generated/prisma'
+import { CourseCategory, AchievementLevel } from '@prisma/client'
 
 export interface StudentAchievement {
   customerId: string
