@@ -34,13 +34,11 @@ export function middleware(request: NextRequest) {
     })
   }
 
-  // If no tenant detected and not demo mode, show a default page or redirect
-  if (!tenantSlug && !isDemoMode) {
-    // Redirect root domain to admin login
-    if (pathname === '/' || pathname === '') {
-      return NextResponse.redirect(new URL('/admin/login', request.url))
-    }
-    // For other paths, show tenant not found page
+  // Allow main domain (trainkit.co.uk) without tenant - shows all courses
+  const isMainDomain = hostname === 'trainkit.co.uk' || hostname === 'www.trainkit.co.uk'
+
+  // If no tenant detected and not demo mode and not main domain, show tenant not found
+  if (!tenantSlug && !isDemoMode && !isMainDomain) {
     return NextResponse.redirect(new URL('/tenant-not-found', request.url))
   }
 
