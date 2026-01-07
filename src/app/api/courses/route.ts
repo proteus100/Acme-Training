@@ -60,9 +60,15 @@ export async function GET(request: NextRequest) {
     })
 
     return NextResponse.json(courses)
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error fetching courses:', error)
-    return NextResponse.json({ error: 'Failed to fetch courses' }, { status: 500 })
+    // Return detailed error for debugging
+    return NextResponse.json({
+      error: 'Failed to fetch courses',
+      details: error?.message || String(error),
+      code: error?.code,
+      meta: error?.meta
+    }, { status: 500 })
   }
 }
 
