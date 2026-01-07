@@ -9,6 +9,9 @@ import { BookingCalendarPreview } from '@/components/BookingCalendarPreview'
 import { StarRating } from '@/components/StarRating'
 import AccountSuspended from '@/components/AccountSuspended'
 
+// Force dynamic rendering to avoid database queries during build
+export const dynamic = 'force-dynamic'
+
 // Valid areas for training centers
 const VALID_AREAS = [
   'devon', 'cornwall', 'somerset', 'dorset', 'bristol', 'london',
@@ -379,24 +382,4 @@ export default async function TenantAreaPage({ params }: PageProps) {
       </section>
     </div>
   )
-}
-
-// Generate static paths for common areas
-export async function generateStaticParams() {
-  const tenants = await prisma.tenant.findMany({
-    where: { active: true },
-    select: { slug: true }
-  })
-
-  const paths = []
-  for (const tenant of tenants) {
-    for (const area of VALID_AREAS) {
-      paths.push({
-        slug: tenant.slug,
-        area: area
-      })
-    }
-  }
-
-  return paths
 }
