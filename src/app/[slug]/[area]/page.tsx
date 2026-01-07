@@ -50,30 +50,16 @@ interface PageProps {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const tenant = await prisma.tenant.findUnique({
-    where: { slug: params.slug, active: true }
-  })
+  // Return basic metadata without database query to avoid build-time errors
+  const areaName = AREA_NAMES[params.area as keyof typeof AREA_NAMES] || params.area
 
-  if (!tenant || !VALID_AREAS.includes(params.area)) {
-    return {
-      title: 'Page Not Found',
-      description: 'The requested page could not be found.'
-    }
-  }
-
-  const areaName = AREA_NAMES[params.area as keyof typeof AREA_NAMES]
-  const businessType = tenant.businessType || 'Training Centre'
-  
   return {
-    title: tenant.metaTitle 
-      ? `${tenant.metaTitle} - ${areaName} ${businessType}`
-      : `${tenant.name} - Professional ${businessType} in ${areaName}`,
-    description: tenant.metaDescription || 
-      `Leading ${businessType.toLowerCase()} in ${areaName}. Expert training courses, professional certifications, and hands-on learning. Book your course today with ${tenant.name}.`,
-    keywords: `${businessType}, ${areaName}, training, courses, certification, ${tenant.name}`,
+    title: `Professional Training Centre in ${areaName}`,
+    description: `Leading training centre in ${areaName}. Expert training courses, professional certifications, and hands-on learning.`,
+    keywords: `training, ${areaName}, courses, certification`,
     openGraph: {
-      title: `${tenant.name} - ${areaName} ${businessType}`,
-      description: tenant.metaDescription || `Professional ${businessType.toLowerCase()} serving ${areaName}`,
+      title: `Training Centre - ${areaName}`,
+      description: `Professional training centre serving ${areaName}`,
       type: 'website',
     },
   }
