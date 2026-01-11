@@ -48,6 +48,18 @@ export default function Home() {
   const [tenantInfo, setTenantInfo] = useState<TenantInfo | null>(null)
 
   useEffect(() => {
+    // Check if we're on the main domain (not a tenant subdomain)
+    const hostname = window.location.hostname
+    const isMainDomain = hostname === 'trainkit.co.uk' ||
+                        hostname === 'www.trainkit.co.uk' ||
+                        hostname.includes('vercel.app')
+
+    if (isMainDomain) {
+      // Redirect to admin login for main domain
+      window.location.href = '/admin/login'
+      return
+    }
+
     fetchTenantInfo()
     fetchCourses()
     checkStudentAuth()
