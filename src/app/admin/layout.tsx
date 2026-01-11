@@ -46,6 +46,12 @@ const navigation = [
 		icon: Building2,
 		isPlatformAdmin: true,
 	},
+	{
+		name: "🔒 Security",
+		href: "/admin/security",
+		icon: Shield,
+		isPlatformAdmin: true,
+	},
 	{ name: "Courses", href: "/admin/courses", icon: BookOpen },
 	{ name: "Training Sessions", href: "/admin/sessions", icon: ClipboardList },
 	{ name: "Students", href: "/admin/customers", icon: Users },

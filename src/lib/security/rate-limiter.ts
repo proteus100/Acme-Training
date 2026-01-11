@@ -207,3 +207,51 @@ export const RATE_LIMITS = {
 export function clearRateLimit(identifier: string): void {
   rateLimitStore.delete(identifier)
 }
+
+/**
+ * Get all currently rate-limited identifiers (for admin dashboard)
+ */
+export function getAllRateLimits(): Array<{
+  identifier: string
+  count: number
+  resetTime: number
+  blocked: boolean
+  timeRemaining: number
+}> {
+  const now = Date.now()
+  const results: Array<{
+    identifier: string
+    count: number
+    resetTime: number
+    blocked: boolean
+    timeRemaining: number
+  }> = []
+
+  for (const [identifier, entry] of rateLimitStore.entries()) {
+    // Only return entries that are still active
+    if (now <= entry.resetTime) {
+      results.push({
+        identifier,
+        count: entry.count,
+        resetTime: entry.resetTime,
+        blocked: entry.blocked,
+        timeRemaining: Math.ceil((entry.resetTime - now) / 1000)
+      })
+    }
+  }
+
+  return results.sort((a, b) => {
+    // Blocked entries first, then by time remaining
+    if (a.blocked !== b.blocked) return a.blocked ? -1 : 1
+    return a.timeRemaining - b.timeRemaining
+  })
+}
+
+/**
+ * Clear all rate limits (super admin only)
+ */
+export function clearAllRateLimits(): number {
+  const count = rateLimitStore.size
+  rateLimitStore.clear()
+  return count
+}
