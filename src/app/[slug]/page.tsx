@@ -27,6 +27,12 @@ export default function TenantPublicPage() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
+    // If slug is 'admin', 'api', or other system routes, don't try to fetch as tenant
+    if (slug === 'admin' || slug === 'api' || slug === 'onboarding' || slug === '_next') {
+      // Let Next.js handle these routes normally
+      return
+    }
+
     async function fetchTenant() {
       try {
         const response = await fetch(`/api/tenant/${slug}`)
