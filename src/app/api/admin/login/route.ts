@@ -74,7 +74,7 @@ export const POST = withErrorHandler(async (request: NextRequest) => {
     const currentTenant = await getCurrentTenant()
 
     console.log('[LOGIN] Detected - tenantSubdomain:', tenantSubdomain, 'currentTenant:', currentTenant?.name || 'null')
-    console.log('[LOGIN] User attempting login - email:', email, 'admin.tenantId:', admin?.tenantId || 'not yet loaded')
+    console.log('[LOGIN] User attempting login - email:', email)
 
     // Ensure default admin exists
     await createDefaultAdmin()
