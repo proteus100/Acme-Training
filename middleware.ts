@@ -1,13 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { extractTenantFromRequest } from '@/lib/tenant'
 
-export function middleware(request: NextRequest) {
+export default function middleware(request: NextRequest) {
+  console.log('[MIDDLEWARE] ===== MIDDLEWARE IS RUNNING =====')
+
   // Get hostname from x-forwarded-host (nginx/proxy) or host header
   const hostname = request.headers.get('x-forwarded-host') || request.headers.get('host') || ''
   const pathname = request.nextUrl.pathname
 
-  console.log('[MIDDLEWARE] START - hostname:', hostname, 'pathname:', pathname)
-  console.log('[MIDDLEWARE] All headers:', JSON.stringify(Object.fromEntries(request.headers)))
+  console.log('[MIDDLEWARE] hostname:', hostname, 'pathname:', pathname)
+
+  // Log ALL headers to diagnose
+  const allHeaders: Record<string, string> = {}
+  request.headers.forEach((value, key) => {
+    allHeaders[key] = value
+  })
+  console.log('[MIDDLEWARE] All headers:', JSON.stringify(allHeaders, null, 2))
 
   // Extract tenant information
   const { tenantSlug, isDemoMode, isAdminRoute } = extractTenantFromRequest(hostname, pathname)
