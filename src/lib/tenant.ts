@@ -109,9 +109,9 @@ export async function getTenantBySlug(slug: string): Promise<TenantConfig | null
       where: { slug, active: true },
       include: {
         TenantSettings: true,
-        courses: {
+        Course: {
           include: {
-            sessions: {
+            CourseSession: {
               where: {
                 startDate: {
                   gte: new Date()
@@ -144,7 +144,7 @@ export async function getTenantBySlug(slug: string): Promise<TenantConfig | null
       planType: tenant.planType,
       maxStudents: tenant.maxStudents,
       maxCourses: tenant.maxCourses,
-      courses: tenant.courses || [],
+      courses: tenant.Course || [],
       settings: tenant.TenantSettings ? {
         whiteLabel: tenant.TenantSettings.whiteLabel,
         customDomain: tenant.TenantSettings.customDomain,
