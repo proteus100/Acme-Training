@@ -61,8 +61,6 @@ export const POST = withErrorHandler(async (request: NextRequest) => {
 
     // Get current tenant from subdomain
     const headersList = await headers()
-    const allHeaders = Object.fromEntries(Array.from(headersList.entries()))
-    console.log('[LOGIN] All request headers:', JSON.stringify(allHeaders, null, 2))
     console.log('[LOGIN] Critical headers:', {
       host: headersList.get('host'),
       'x-forwarded-host': headersList.get('x-forwarded-host'),
