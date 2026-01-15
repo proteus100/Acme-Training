@@ -6,12 +6,13 @@ export function middleware(request: NextRequest) {
   const hostname = request.headers.get('x-forwarded-host') || request.headers.get('host') || ''
   const pathname = request.nextUrl.pathname
 
-  console.log('Middleware - hostname:', hostname, 'pathname:', pathname)
+  console.log('[MIDDLEWARE] START - hostname:', hostname, 'pathname:', pathname)
+  console.log('[MIDDLEWARE] All headers:', JSON.stringify(Object.fromEntries(request.headers)))
 
   // Extract tenant information
   const { tenantSlug, isDemoMode, isAdminRoute } = extractTenantFromRequest(hostname, pathname)
 
-  console.log('Middleware - tenantSlug:', tenantSlug, 'isDemoMode:', isDemoMode, 'isAdminRoute:', isAdminRoute)
+  console.log('[MIDDLEWARE] Extracted - tenantSlug:', tenantSlug, 'isDemoMode:', isDemoMode, 'isAdminRoute:', isAdminRoute)
 
   // Clone the request headers and add tenant information
   const requestHeaders = new Headers(request.headers)

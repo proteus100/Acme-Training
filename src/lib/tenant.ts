@@ -273,18 +273,23 @@ export async function getTenantSubdomain(): Promise<string | null> {
 
   // Try middleware header first
   let subdomain = headersList.get('x-tenant-subdomain')
+  console.log('[getTenantSubdomain] x-tenant-subdomain header:', subdomain)
 
   // If not set by middleware, extract from host header
   if (!subdomain) {
     const hostname = headersList.get('host') || ''
+    console.log('[getTenantSubdomain] Fallback - hostname from header:', hostname)
     const extractResult = extractTenantFromRequest(hostname, '')
     subdomain = extractResult.tenantSlug || null
+    console.log('[getTenantSubdomain] Extracted tenantSlug:', subdomain)
   }
 
   if (!subdomain || subdomain === 'platform') {
+    console.log('[getTenantSubdomain] Returning null (subdomain:', subdomain, ')')
     return null
   }
 
+  console.log('[getTenantSubdomain] Returning subdomain:', subdomain)
   return subdomain
 }
 
