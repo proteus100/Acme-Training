@@ -275,10 +275,10 @@ export async function getTenantSubdomain(): Promise<string | null> {
   let subdomain = headersList.get('x-tenant-subdomain')
   console.log('[getTenantSubdomain] x-tenant-subdomain header:', subdomain)
 
-  // If not set by middleware, extract from host header
+  // If not set by middleware, extract from host header (check x-forwarded-host first, then host)
   if (!subdomain) {
-    const hostname = headersList.get('host') || ''
-    console.log('[getTenantSubdomain] Fallback - hostname from header:', hostname)
+    const hostname = headersList.get('x-forwarded-host') || headersList.get('host') || ''
+    console.log('[getTenantSubdomain] Fallback - hostname from header (x-forwarded-host or host):', hostname)
     const extractResult = extractTenantFromRequest(hostname, '')
     subdomain = extractResult.tenantSlug || null
     console.log('[getTenantSubdomain] Extracted tenantSlug:', subdomain)
