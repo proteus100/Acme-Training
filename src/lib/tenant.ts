@@ -50,7 +50,7 @@ export async function getTenantByDomain(domain: string): Promise<TenantConfig | 
         active: true
       },
       include: {
-        settings: true
+        TenantSettings: true
       }
     })
 
@@ -72,11 +72,11 @@ export async function getTenantByDomain(domain: string): Promise<TenantConfig | 
       planType: tenant.planType,
       maxStudents: tenant.maxStudents,
       maxCourses: tenant.maxCourses,
-      settings: tenant.settings ? {
-        whiteLabel: tenant.settings.whiteLabel,
-        customDomain: tenant.settings.customDomain,
-        emailFromName: tenant.settings.emailFromName,
-        emailFromAddress: tenant.settings.emailFromAddress
+      settings: tenant.TenantSettings ? {
+        whiteLabel: tenant.TenantSettings.whiteLabel,
+        customDomain: tenant.TenantSettings.customDomain,
+        emailFromName: tenant.TenantSettings.emailFromName,
+        emailFromAddress: tenant.TenantSettings.emailFromAddress
       } : undefined
     }
 
@@ -108,7 +108,7 @@ export async function getTenantBySlug(slug: string): Promise<TenantConfig | null
     const tenant = await prisma.tenant.findFirst({
       where: { slug, active: true },
       include: {
-        settings: true,
+        TenantSettings: true,
         courses: {
           include: {
             sessions: {
@@ -145,11 +145,11 @@ export async function getTenantBySlug(slug: string): Promise<TenantConfig | null
       maxStudents: tenant.maxStudents,
       maxCourses: tenant.maxCourses,
       courses: tenant.courses || [],
-      settings: tenant.settings ? {
-        whiteLabel: tenant.settings.whiteLabel,
-        customDomain: tenant.settings.customDomain,
-        emailFromName: tenant.settings.emailFromName,
-        emailFromAddress: tenant.settings.emailFromAddress
+      settings: tenant.TenantSettings ? {
+        whiteLabel: tenant.TenantSettings.whiteLabel,
+        customDomain: tenant.TenantSettings.customDomain,
+        emailFromName: tenant.TenantSettings.emailFromName,
+        emailFromAddress: tenant.TenantSettings.emailFromAddress
       } : undefined
     }
 
