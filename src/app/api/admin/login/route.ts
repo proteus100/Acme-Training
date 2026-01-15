@@ -61,8 +61,11 @@ export const POST = withErrorHandler(async (request: NextRequest) => {
 
     // Get current tenant from subdomain
     const headersList = await headers()
-    console.log('API Headers:', {
+    const allHeaders = Object.fromEntries(Array.from(headersList.entries()))
+    console.log('[LOGIN] All request headers:', JSON.stringify(allHeaders, null, 2))
+    console.log('[LOGIN] Critical headers:', {
       host: headersList.get('host'),
+      'x-forwarded-host': headersList.get('x-forwarded-host'),
       'x-tenant-subdomain': headersList.get('x-tenant-subdomain'),
       'x-tenant-slug': headersList.get('x-tenant-slug')
     })
@@ -70,7 +73,8 @@ export const POST = withErrorHandler(async (request: NextRequest) => {
     const tenantSubdomain = await getTenantSubdomain()
     const currentTenant = await getCurrentTenant()
 
-    console.log('Login attempt - Subdomain:', tenantSubdomain, 'Tenant:', currentTenant?.name)
+    console.log('[LOGIN] Detected - tenantSubdomain:', tenantSubdomain, 'currentTenant:', currentTenant?.name || 'null')
+    console.log('[LOGIN] User attempting login - email:', email, 'admin.tenantId:', admin?.tenantId || 'not yet loaded')
 
     // Ensure default admin exists
     await createDefaultAdmin()
@@ -79,7 +83,7 @@ export const POST = withErrorHandler(async (request: NextRequest) => {
   const admin = await prisma.adminUser.findUnique({
     where: { email: email.toLowerCase() },
     include: {
-      tenant: true // Include tenant info
+      Tenant: true // Include tenant info (capital T)
     }
   })
 
@@ -90,6 +94,9 @@ export const POST = withErrorHandler(async (request: NextRequest) => {
   if (!admin.isActive) {
     throw ApiErrors.Unauthorized('Account is disabled')
   }
+
+  console.log('[LOGIN] Admin loaded - email:', admin.email, 'role:', admin.role, 'tenantId:', admin.tenantId)
+  console.log('[LOGIN] Authentication check - currentTenant exists?', !!currentTenant, 'currentTenant?.id:', currentTenant?.id)
 
   // Tenant-scoped authentication check
   // If accessing from a tenant subdomain, verify the admin belongs to that tenant
@@ -149,13 +156,13 @@ export const POST = withErrorHandler(async (request: NextRequest) => {
       lastName: admin.lastName,
       role: admin.role,
       tenantId: admin.tenantId,
-      tenant: admin.tenant ? {
-        id: admin.tenant.id,
-        name: admin.tenant.name,
-        slug: admin.tenant.slug,
-        logo: admin.tenant.logo,
-        primaryColor: admin.tenant.primaryColor,
-        secondaryColor: admin.tenant.secondaryColor
+      tenant: admin.Tenant ? {
+        id: admin.Tenant.id,
+        name: admin.Tenant.name,
+        slug: admin.Tenant.slug,
+        logo: admin.Tenant.logo,
+        primaryColor: admin.Tenant.primaryColor,
+        secondaryColor: admin.Tenant.secondaryColor
       } : null
     }
   })
